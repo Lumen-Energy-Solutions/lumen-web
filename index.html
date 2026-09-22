@@ -1,0 +1,1483 @@
+<!doctype html>
+<html lang="es">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Lumen Energy Solutions: IoT industrial de punta a punta en Honduras, El Salvador y Guatemala — SCADA y gestión de energía para plantas, submedición y facturación para edificios y centros comerciales.">
+<title>Lumen Energy Solutions</title>
+<link rel="icon" href="assets/favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" href="assets/favicon.png" sizes="180x180">
+<link rel="apple-touch-icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Questrial&display=swap">
+
+<style>
+:root{
+  --ground:#f3f6fd; --surface:#ffffff; --surface-2:#f8fafe; --tint:#eaf0fd;
+  --ink:#112143; --ink-2:#4d5d80; --ink-3:#8593b3;
+  --line:#e2e9f6; --line-2:#edf1f9;
+  --blue:#2f6fd0; --blue-deep:#1b3f86; --blue-soft:#e9f0fd;
+  --amber:#cf5015; --amber-ink:#ffffff;
+  --panel:#0e1b35; --panel-2:#16264a;
+  --panel-ink:#eaf0fb; --panel-ink-2:#93a5c6; --panel-line:#25375f;
+  --glow-1:rgba(72,133,232,.22); --glow-2:rgba(118,126,236,.17);
+  --c1:#1d8f56; --c2:#a8890f; --c3:#c56f12; --c4:#cf3b4a; --c5:#3a7ed0;
+  --sans:"Questrial",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --disp:"Poppins","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:"Poppins","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --r-sm:10px; --r:16px; --r-lg:22px; --pill:999px;
+  --sh-1:0 1px 2px rgba(17,33,67,.04), 0 6px 18px -8px rgba(17,33,67,.12);
+  --sh-2:0 2px 6px rgba(17,33,67,.05), 0 20px 44px -20px rgba(17,33,67,.22);
+  --sh-3:0 6px 14px rgba(17,33,67,.06), 0 44px 90px -34px rgba(17,33,67,.36);
+  --maxw:1160px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#080f1e; --surface:#0f1a30; --surface-2:#132039; --tint:#101c34;
+    --ink:#e8eefb; --ink-2:#9fb0cd; --ink-3:#7688a8;
+    --line:#213152; --line-2:#1a2842;
+    --blue:#6fa4f0; --blue-deep:#9dc0f7; --blue-soft:#14233f;
+    --amber:#f0873c; --amber-ink:#170a02;
+    --panel:#060c1a; --panel-2:#0e1930;
+    --panel-ink:#e8eefb; --panel-ink-2:#8fa2c3; --panel-line:#1e2c4c;
+    --glow-1:rgba(60,120,230,.17); --glow-2:rgba(110,118,230,.13);
+    --c1:#3fbd7c; --c2:#d4b634; --c3:#ef9a41; --c4:#f06b77; --c5:#6ea8ec;
+    --sh-1:0 1px 2px rgba(0,0,0,.3), 0 6px 18px -8px rgba(0,0,0,.5);
+    --sh-2:0 2px 6px rgba(0,0,0,.35), 0 20px 44px -20px rgba(0,0,0,.6);
+    --sh-3:0 6px 14px rgba(0,0,0,.4), 0 44px 90px -34px rgba(0,0,0,.75);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#080f1e; --surface:#0f1a30; --surface-2:#132039; --tint:#101c34;
+  --ink:#e8eefb; --ink-2:#9fb0cd; --ink-3:#7688a8;
+  --line:#213152; --line-2:#1a2842;
+  --blue:#6fa4f0; --blue-deep:#9dc0f7; --blue-soft:#14233f;
+  --amber:#f0873c; --amber-ink:#170a02;
+  --panel:#060c1a; --panel-2:#0e1930;
+  --panel-ink:#e8eefb; --panel-ink-2:#8fa2c3; --panel-line:#1e2c4c;
+  --glow-1:rgba(60,120,230,.17); --glow-2:rgba(110,118,230,.13);
+  --c1:#3fbd7c; --c2:#d4b634; --c3:#ef9a41; --c4:#f06b77; --c5:#6ea8ec;
+  --sh-1:0 1px 2px rgba(0,0,0,.3), 0 6px 18px -8px rgba(0,0,0,.5);
+  --sh-2:0 2px 6px rgba(0,0,0,.35), 0 20px 44px -20px rgba(0,0,0,.6);
+  --sh-3:0 6px 14px rgba(0,0,0,.4), 0 44px 90px -34px rgba(0,0,0,.75);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:var(--sans); font-size:16px; line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+img{max-width:100%; display:block}
+::selection{background:var(--blue); color:#fff}
+:focus-visible{outline:2px solid var(--blue); outline-offset:3px; border-radius:4px}
+
+.wrap{max-width:var(--maxw); margin-inline:auto; padding-inline:22px}
+.sec{padding-block:clamp(56px,7vw,94px); position:relative}
+.rule{border:0; border-top:1px solid var(--line); margin:0}
+
+/* soft light that washes across the page, the way the eye reads depth */
+.glow{position:relative; isolation:isolate; overflow:clip}
+.glow::before{
+  content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(760px 500px at 86% 2%, var(--glow-1), transparent 62%),
+    radial-gradient(660px 460px at -4% 34%, var(--glow-2), transparent 60%);
+}
+
+/* ---------- type ---------- */
+h1,h2,h3{font-family:var(--disp); font-weight:700; letter-spacing:-.022em; margin:0; text-wrap:balance; line-height:1.14}
+h1{font-size:clamp(2.15rem,5.2vw,3.8rem); letter-spacing:-.033em; line-height:1.08}
+h2{font-size:clamp(1.7rem,3.5vw,2.6rem); letter-spacing:-.028em}
+h3{font-size:1.06rem; font-weight:600; letter-spacing:-.008em; line-height:1.32}
+p{margin:0}
+.eyebrow{
+  font-family:var(--disp); font-size:.695rem; font-weight:600;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--blue);
+}
+.lede{font-size:clamp(1.03rem,1.5vw,1.18rem); color:var(--ink-2); max-width:62ch}
+.sec-head{display:flex; flex-direction:column; gap:15px; max-width:68ch}
+.accent{color:var(--blue)}
+
+/* ---------- header ---------- */
+.hdr{
+  position:sticky; top:env(safe-area-inset-top,0px); z-index:40;
+  background:color-mix(in srgb, var(--surface) 86%, transparent);
+  backdrop-filter:saturate(1.6) blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.hdr-in{display:flex; align-items:center; gap:22px; height:68px}
+.brand{display:flex; align-items:center; text-decoration:none; flex:0 0 auto; margin-right:auto}
+.brand-clip{display:block; width:130px; height:36px; overflow:hidden; position:relative}
+.brand-clip img{position:absolute; width:166px; max-width:none; left:-40px; top:-36px}
+.nav{display:flex; gap:21px; align-items:center}
+.nav a{
+  font-family:var(--disp); text-decoration:none; font-size:.875rem; font-weight:500; color:var(--ink-2);
+  white-space:nowrap; transition:color .15s;
+}
+.nav a:hover{color:var(--blue)}
+.hdr-act{display:flex; align-items:center; gap:9px}
+.lang{
+  font-family:var(--disp); font-size:.735rem; font-weight:600; letter-spacing:.09em;
+  background:none; border:1px solid var(--line); color:var(--ink-2);
+  padding:7px 11px; cursor:pointer; border-radius:var(--pill); line-height:1;
+}
+.lang:hover{border-color:var(--blue); color:var(--blue)}
+.login{
+  font-family:var(--disp); font-size:.83rem; font-weight:500; text-decoration:none;
+  color:var(--ink-2); padding:8px 4px; white-space:nowrap;
+}
+.login:hover{color:var(--blue)}
+
+.btn{
+  display:inline-flex; align-items:center; gap:9px; text-decoration:none;
+  font-family:var(--disp); font-size:.875rem; font-weight:600; padding:13px 24px;
+  border-radius:var(--r-sm); border:1px solid transparent; line-height:1.15; white-space:nowrap;
+  transition:transform .15s ease, box-shadow .15s ease, background .15s, border-color .15s;
+}
+.btn-p{background:var(--amber); color:var(--amber-ink); box-shadow:0 6px 18px -8px rgba(207,80,21,.7)}
+.btn-p:hover{transform:translateY(-2px); box-shadow:0 12px 26px -10px rgba(207,80,21,.75)}
+.btn-g{border-color:var(--line); color:var(--ink); background:var(--surface); box-shadow:var(--sh-1)}
+.btn-g:hover{transform:translateY(-2px); border-color:var(--blue); color:var(--blue)}
+.btn-sm{padding:9px 17px; font-size:.83rem}
+.btn-inv{background:var(--surface); color:var(--panel)}
+.btn-inv:hover{transform:translateY(-2px)}
+.btn-gi{border-color:var(--panel-line); color:var(--panel-ink)}
+.btn-gi:hover{transform:translateY(-2px); border-color:var(--panel-ink-2)}
+
+/* ---------- hero ---------- */
+.hero{padding-block:clamp(52px,7vw,96px) clamp(50px,6.5vw,86px)}
+.hero-grid{display:grid; grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr); gap:clamp(34px,5vw,64px); align-items:center}
+.hero-txt{display:flex; flex-direction:column; gap:24px; align-items:flex-start}
+.hero-cta{display:flex; gap:12px; flex-wrap:wrap; padding-top:4px}
+.geo{
+  font-family:var(--disp); font-size:.755rem; font-weight:500; letter-spacing:.1em; color:var(--ink-3);
+  display:flex; gap:10px; flex-wrap:wrap; align-items:center; text-transform:uppercase;
+}
+.geo .dot{width:3px; height:3px; background:var(--ink-3); border-radius:50%}
+
+.hero-art{display:flex; justify-content:center}
+.hero-art img{
+  width:100%; max-width:470px; height:auto;
+  /* the illustration melts into the page instead of sitting in a frame */
+  /* fade the four edges, not a circle: the tower and the tanks sit out on the
+     diagonals, exactly where a circular mask clips. Bands are sized to the free
+     margin on each side (content runs x 4-96.5%, y 8.5-87%). */
+  --m-h:linear-gradient(to right, rgba(0,0,0,0) 0%, #000 4.5%, #000 96.5%, rgba(0,0,0,0) 100%);
+  --m-v:linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 8%, #000 88%, rgba(0,0,0,0) 100%);
+  -webkit-mask-image:var(--m-h), var(--m-v);
+  -webkit-mask-composite:source-in;
+  mask-image:var(--m-h), var(--m-v);
+  mask-composite:intersect;
+  mask-repeat:no-repeat;
+  mask-size:100% 100%;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .hero-art img{filter:brightness(.9) saturate(1.05)}
+}
+:root[data-theme="dark"] .hero-art img{filter:brightness(.9) saturate(1.05)}
+
+/* ---------- clients ---------- */
+.clients{padding-block:42px}
+.clients-in{display:flex; flex-direction:column; gap:24px; align-items:center}
+.logos{display:flex; flex-wrap:wrap; gap:16px 38px; justify-content:center; align-items:center}
+.logos img{
+  height:34px; width:auto; object-fit:contain;
+  filter:grayscale(1); opacity:.5; transition:filter .25s, opacity .25s;
+}
+.logos img:hover{filter:none; opacity:1}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .logos img{filter:grayscale(1) brightness(1.8) contrast(.8); opacity:.6}
+  :root:not([data-theme="light"]) .logos img:hover{filter:none; opacity:1}
+}
+:root[data-theme="dark"] .logos img{filter:grayscale(1) brightness(1.8) contrast(.8); opacity:.6}
+:root[data-theme="dark"] .logos img:hover{filter:none; opacity:1}
+
+/* ---------- stats ---------- */
+.stats{padding-block:10px 56px}
+.stats-in{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+.stat{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--r);
+  box-shadow:var(--sh-1); padding:26px 26px 28px; display:flex; flex-direction:column; gap:6px;
+}
+.stat .n{
+  font-family:var(--disp); font-weight:700; font-size:clamp(1.8rem,3.4vw,2.4rem);
+  letter-spacing:-.035em; line-height:1; color:var(--blue); font-variant-numeric:tabular-nums;
+}
+.stat .l{font-size:.885rem; color:var(--ink-2); line-height:1.5}
+
+/* ---------- flagship ---------- */
+.flag{background:linear-gradient(180deg, var(--tint) 0%, var(--ground) 72%)}
+.flag-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:18px; margin-top:48px}
+.feat,.sol,.case,.how-it{position:relative; overflow:hidden}
+.feat{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--r);
+  box-shadow:var(--sh-1); padding:26px 25px 28px; display:flex; flex-direction:column; gap:11px;
+}
+/* the numeral sits behind the card as a watermark and leans in on hover */
+.feat-n{
+  position:absolute; top:14px; right:18px; z-index:0; pointer-events:none;
+  font-family:var(--disp); font-weight:700; font-size:3rem; line-height:1;
+  letter-spacing:-.05em; color:var(--blue); opacity:.09;
+  transition:opacity .4s ease, transform .4s cubic-bezier(.22,.7,.3,1);
+}
+.feat h3,.feat p,.feat .feat-ico,
+.sol h3,.sol p,.sol .k,.sol .sol-ico,
+.case p,.case .s,
+.how-it h3,.how-it p,.how-it .feat-ico{position:relative; z-index:1}
+.feat-ico{
+  width:40px; height:40px; border-radius:12px; background:var(--blue-soft); color:var(--blue);
+  display:flex; align-items:center; justify-content:center; margin-bottom:3px;
+  transition:background .3s ease, color .3s ease, transform .4s cubic-bezier(.22,.7,.3,1);
+}
+.feat-ico svg{width:21px; height:21px}
+.feat::after,.sol::after,.case::after,.how-it::after{
+  content:""; position:absolute; left:0; bottom:0; height:3px; width:0;
+  background:linear-gradient(90deg, var(--blue), var(--amber));
+  transition:width .5s cubic-bezier(.22,.7,.3,1);
+}
+@media (hover:hover){
+  .feat:hover .feat-n,.sol:hover .feat-n,.case:hover .feat-n,.how-it:hover .feat-n{
+    opacity:.15; transform:translate(-2px,3px) scale(1.04);
+  }
+  .feat:hover .feat-ico,.how-it:hover .feat-ico,.sol:hover .sol-ico{
+    background:var(--blue); color:#fff; transform:translateY(-2px) rotate(-4deg);
+  }
+  .sol.is-lead:hover .sol-ico{background:var(--amber); color:#fff}
+  .feat:hover::after,.sol:hover::after,.case:hover::after,.how-it:hover::after{width:100%}
+}
+.feat p{font-size:.905rem; color:var(--ink-2); line-height:1.62}
+.note{
+  margin-top:34px; background:var(--surface); border:1px solid var(--line);
+  border-left:3px solid var(--amber); border-radius:var(--r-sm);
+  box-shadow:var(--sh-1); padding:22px 26px;
+  display:flex; flex-direction:column; gap:9px; max-width:80ch;
+}
+.note .t{font-family:var(--disp); font-size:.68rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--amber)}
+.note p{font-size:.975rem; color:var(--ink-2); line-height:1.62}
+.flag-cta{margin-top:38px; display:flex; gap:12px; flex-wrap:wrap}
+.sub-head{margin-top:clamp(72px,9vw,120px)}
+
+/* ---------- value chain ---------- */
+.chain-grid{display:grid; grid-template-columns:minmax(0,340px) minmax(0,1fr); gap:clamp(32px,5vw,68px); align-items:stretch; margin-top:50px}
+.penta-col{align-self:stretch}
+.penta-box{position:sticky; top:calc(env(safe-area-inset-top,0px) + 94px); width:100%; max-width:340px; margin-inline:auto}
+.penta{width:100%; height:auto; display:block; overflow:visible}
+.penta .side{fill:none; stroke-linecap:round; stroke-width:10; transition:stroke-width .2s ease, opacity .2s ease}
+.penta[data-active] .side{opacity:.18}
+.penta[data-active="1"] .s1,.penta[data-active="2"] .s2,.penta[data-active="3"] .s3,
+.penta[data-active="4"] .s4,.penta[data-active="5"] .s5{opacity:1; stroke-width:16}
+.penta .s1{stroke:var(--c1)} .penta .s2{stroke:var(--c2)} .penta .s3{stroke:var(--c3)}
+.penta .s4{stroke:var(--c4)} .penta .s5{stroke:var(--c5)}
+.penta .badge{fill:var(--surface); stroke:var(--line)}
+.penta .bnum{font-family:var(--disp); font-size:12px; font-weight:600; fill:var(--ink-2); text-anchor:middle; dominant-baseline:central}
+.readout{
+  position:absolute; inset:0; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:5px; text-align:center;
+  pointer-events:none; padding-inline:23%;
+}
+.readout .rn{font-family:var(--disp); font-weight:700; font-size:2rem; letter-spacing:-.045em; line-height:1; color:var(--ink)}
+.readout .rl{font-family:var(--disp); font-size:.655rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); line-height:1.45}
+
+.chain-list{display:flex; flex-direction:column; gap:14px}
+.chain-item{
+  display:grid; grid-template-columns:auto minmax(0,1fr); gap:0 18px; align-items:stretch;
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--r);
+  box-shadow:var(--sh-1); padding:22px 24px 24px 20px; cursor:default;
+}
+.bar{width:4px; border-radius:var(--pill); background:var(--ink-3)}
+.chain-item[data-i="1"] .bar{background:var(--c1)} .chain-item[data-i="2"] .bar{background:var(--c2)}
+.chain-item[data-i="3"] .bar{background:var(--c3)} .chain-item[data-i="4"] .bar{background:var(--c4)}
+.chain-item[data-i="5"] .bar{background:var(--c5)}
+.chain-body{display:flex; flex-direction:column; gap:8px; min-width:0}
+.chain-top{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap}
+.chain-i{font-family:var(--disp); font-size:.7rem; font-weight:600; color:var(--ink-3); letter-spacing:.11em}
+.chain-name{font-family:var(--disp); font-weight:600; font-size:1.06rem; letter-spacing:-.015em}
+.chain-body p{font-size:.93rem; color:var(--ink-2); line-height:1.62; max-width:60ch}
+.tags{display:flex; flex-wrap:wrap; gap:7px; padding-top:4px}
+.tag{
+  font-family:var(--disp); font-size:.695rem; font-weight:500; letter-spacing:.015em;
+  background:var(--surface-2); border:1px solid var(--line); color:var(--ink-3);
+  padding:4px 11px; border-radius:var(--pill);
+}
+
+/* ---------- solutions ---------- */
+.sol-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:18px; margin-top:46px}
+.sol{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--r);
+  box-shadow:var(--sh-1); padding:28px 26px 30px; display:flex; flex-direction:column; gap:11px;
+}
+.sol .k{font-family:var(--disp); font-size:.665rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--blue)}
+.sol p{font-size:.905rem; color:var(--ink-2); line-height:1.62}
+.sol.is-lead{background:linear-gradient(165deg, var(--blue-soft) 0%, var(--surface) 62%); border-color:color-mix(in srgb, var(--blue) 26%, var(--line))}
+.sol.is-lead .k{color:var(--amber)}
+.sol-ico{
+  width:44px; height:44px; border-radius:13px; background:var(--blue-soft); color:var(--blue);
+  display:flex; align-items:center; justify-content:center; margin-bottom:6px;
+  transition:background .3s ease, color .3s ease, transform .4s cubic-bezier(.22,.7,.3,1);
+}
+.sol-ico svg{width:23px; height:23px; display:block}
+.sol.is-lead .sol-ico{background:color-mix(in srgb, var(--amber) 14%, var(--surface)); color:var(--amber)}
+
+.sensors{margin-top:clamp(42px,5vw,62px); display:flex; flex-direction:column; gap:16px}
+.chips{display:flex; flex-wrap:wrap; gap:8px}
+.chip{
+  font-family:var(--disp); font-size:.755rem; font-weight:500; background:var(--surface);
+  border:1px solid var(--line); padding:8px 15px; border-radius:var(--pill); color:var(--ink-2);
+  box-shadow:var(--sh-1);
+}
+
+/* ---------- cases ---------- */
+.cases{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:18px; margin-top:48px}
+.case{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--r);
+  box-shadow:var(--sh-1); padding:26px 25px 28px; display:flex; flex-direction:column; gap:12px;
+}
+.case .s{
+  font-family:var(--disp); font-size:.665rem; font-weight:600; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--blue); background:var(--blue-soft);
+  border-radius:var(--pill); padding:5px 12px; align-self:flex-start;
+}
+.case p{font-size:.925rem; color:var(--ink-2); line-height:1.65}
+
+/* ---------- how we work ---------- */
+.how{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:18px; margin-top:46px}
+.how-it{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--r);
+  box-shadow:var(--sh-1); padding:28px 26px 30px; display:flex; flex-direction:column; gap:11px;
+}
+.how-it p{font-size:.93rem; color:var(--ink-2); line-height:1.62}
+
+/* ---------- product screenshots ---------- */
+.shot{margin:0; display:flex; flex-direction:column; gap:16px}
+.shot-frame{
+  position:relative; border:1px solid var(--line); background:var(--surface);
+  border-radius:var(--r-lg); overflow:hidden; box-shadow:var(--sh-3);
+}
+.shot img{width:100%; height:auto}
+.shot figcaption{font-size:.885rem; color:var(--ink-3); line-height:1.6; max-width:76ch}
+.shot-wide{margin-top:clamp(44px,5.5vw,68px)}
+.shot-mid{max-width:800px; margin-inline:auto}
+.shot-mid figcaption{text-align:center; max-width:66ch; margin-inline:auto}
+
+
+/* ---------- dashboard composition: the numbers lift off the screenshot ---------- */
+.compo{position:relative}
+.compo-shot{
+  width:80%; margin-left:auto; border:1px solid var(--line); border-radius:var(--r-lg);
+  overflow:hidden; box-shadow:var(--sh-3); background:var(--surface);
+}
+.pop{
+  position:absolute; z-index:3; background:var(--surface); border:1px solid var(--line);
+  border-radius:13px; box-shadow:var(--sh-2); padding:12px 16px;
+  display:flex; flex-direction:column; gap:2px; min-width:136px;
+}
+.pop .k{font-family:var(--disp); font-size:.57rem; font-weight:600; letter-spacing:.13em; text-transform:uppercase; color:var(--ink-3)}
+.pop .v{font-family:var(--disp); font-weight:600; font-size:1.2rem; letter-spacing:-.025em; color:var(--ink); font-variant-numeric:tabular-nums}
+.pop .v i{font-style:normal; font-size:.72rem; font-weight:500; color:var(--ink-3); margin-left:2px}
+.pop .v em{font-style:normal; color:var(--blue)}
+.pop-1{top:-22px; left:0}
+.pop-2{top:31%; left:0}
+.pop-3{bottom:20%; left:6%}
+.pop-4{top:-22px; right:5%}
+.compo-alt .compo-shot{width:72%; margin-left:0; margin-right:auto}
+.compo-alt .pop-1{top:-20px; left:auto; right:0}
+.compo-alt .pop-2{top:36%; left:auto; right:0}
+.compo-alt .pop-3{bottom:14%; left:auto; right:7%}
+
+/* ---------- architecture diagram ---------- */
+.arch{margin:0; margin-top:clamp(44px,5.5vw,68px); display:flex; flex-direction:column; gap:16px}
+.arch-scroll{
+  overflow-x:auto; background:var(--surface); border:1px solid var(--line);
+  border-radius:var(--r-lg); box-shadow:var(--sh-1); padding:26px 22px;
+}
+.arch svg{width:100%; min-width:1020px; height:auto; display:block}
+.arch figcaption{font-size:.885rem; color:var(--ink-3); line-height:1.6; max-width:76ch}
+.ad-box{fill:var(--surface); stroke-width:1.6}
+.b1{stroke:var(--c1)} .b2{stroke:var(--c2)} .b3{stroke:var(--c3)} .b5{stroke:var(--c5)}
+.ad-cloud{fill:var(--blue-soft); stroke:var(--blue); stroke-width:2}
+.ad-t{fill:var(--ink); font-family:var(--disp); font-size:13px; font-weight:600}
+.ad-sub{fill:var(--ink-3)}
+.ad-ico{fill:none; stroke:var(--c1); stroke-width:2.2; stroke-linecap:round}
+.ad-sub{fill:var(--ink-3); font-family:var(--disp); font-size:11.2px; font-weight:500}
+.ad-ct2{fill:var(--ink); font-family:var(--disp); font-size:14.5px; font-weight:700}
+.ad-cs2{fill:var(--ink-2); font-family:var(--disp); font-size:10px; font-weight:500}
+.ad-net{fill:none; stroke:var(--c2); stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round}
+.lc-mark line{fill:none; stroke-width:3.2; stroke-linecap:round}
+.lc1{stroke:#2c9e53} .lc2{stroke:#6192e0} .lc3{stroke:#f14e5d} .lc4{stroke:#df9229} .lc5{stroke:#dfcb4a}
+.lc-mark .lcb{fill:#3f7fd0}
+.ad-mid{text-anchor:middle}
+.ad-stage{font-family:var(--disp); font-size:10.5px; font-weight:600; letter-spacing:.12em; text-anchor:middle}
+.s1{fill:var(--c1)} .s2{fill:var(--c2)} .s3{fill:var(--c3)} .s4{fill:var(--blue)} .s5{fill:var(--c5)}
+.ad-link{stroke:var(--ink-3); stroke-width:1.7; fill:none; stroke-dasharray:1.5 5; stroke-linecap:round; opacity:.85}
+.ad-ctrl{stroke:var(--ink-3); stroke-width:1.7; fill:none; stroke-dasharray:1.5 5; stroke-linecap:round; opacity:.55}
+.ad-edge{fill:var(--ink-3); font-family:var(--disp); font-size:11px; font-weight:500; text-anchor:middle}
+
+
+/* ---------- prorrateo & prefactura module ---------- */
+.mod{display:grid; grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr); gap:clamp(34px,5vw,76px); align-items:center; margin-top:44px}
+.doc-wrap{perspective:1600px; display:flex; justify-content:center}
+.doc{
+  --p-ink:#2f3b4d; --p-mut:#6b7889; --p-navy:#47566b; --p-line:#e4e8ee;
+  --p-tint:#f6f8fa; --p-strong:#1d2836;
+  width:100%; max-width:440px; background:#fff; color:var(--p-ink);
+  border-radius:8px; overflow:hidden; padding:30px 30px 0;
+  font-family:var(--disp); font-variant-numeric:tabular-nums;
+  transform:rotateY(-9deg) rotateZ(-1.4deg);
+  box-shadow:28px 34px 70px -28px rgba(17,33,67,.55), 0 2px 8px rgba(17,33,67,.12);
+  backface-visibility:hidden;
+  transition:transform .45s cubic-bezier(.22,.7,.3,1), box-shadow .45s cubic-bezier(.22,.7,.3,1);
+}
+/* the sheet leans toward you on hover, so the figures become readable */
+@media (hover:hover) and (min-width:901px){
+  .doc-wrap:hover .doc{
+    transform:rotateY(-5deg) rotateZ(-.6deg) scale(1.055);
+    box-shadow:34px 44px 88px -30px rgba(17,33,67,.6), 0 3px 12px rgba(17,33,67,.15);
+  }
+}
+.doc-head{display:flex; justify-content:space-between; align-items:flex-start; gap:16px}
+.doc-site{font-family:var(--disp); font-size:1.28rem; font-weight:500; letter-spacing:-.02em; color:var(--p-strong); margin:0}
+.doc-sub{font-size:.635rem; color:var(--p-mut); margin-top:3px}
+.doc-brand{text-align:right}
+.doc-kind{display:block; font-size:1.45rem; font-weight:300; letter-spacing:.005em; color:var(--p-navy); line-height:1}
+.doc-kind-2{display:block; font-size:.605rem; font-weight:500; letter-spacing:.06em; color:var(--p-navy); margin-top:3px}
+.doc-meta{background:var(--p-tint); border-radius:4px; padding:9px 12px; margin:16px 0 0 auto; width:76%; display:flex; flex-direction:column; gap:3px}
+.doc-meta div{display:flex; justify-content:space-between; gap:10px; font-size:.64rem}
+.doc-meta dt{color:var(--p-ink)}
+.doc-meta dd{margin:0; color:var(--p-ink); font-weight:500}
+.doc-sec{font-size:.625rem; font-weight:500; letter-spacing:.055em; color:var(--p-ink); margin-top:17px}
+.doc-tbl{width:100%; border-collapse:collapse; margin-top:8px; font-size:.7rem}
+.doc-tbl th{background:var(--p-navy); color:#fff; font-weight:500; text-align:right; padding:8px 11px; font-size:.655rem}
+.doc-tbl th:first-child{text-align:left; border-radius:4px 0 0 0}
+.doc-tbl th:last-child{border-radius:0 4px 0 0}
+.doc-tbl td{padding:7px 11px; text-align:right; border-bottom:1px solid var(--p-line)}
+.doc-tbl td:first-child{text-align:left}
+.doc-tbl tbody tr:nth-child(odd){background:var(--p-tint)}
+.doc-tbl .sub td{font-weight:500}
+.doc-tbl tfoot td{background:var(--p-tint); border-bottom:0; padding:12px 11px; font-size:.745rem; font-weight:500; color:var(--p-strong)}
+.doc-tbl tfoot .tot{font-size:1.18rem; font-weight:500; letter-spacing:-.025em}
+.doc-note{border:1px solid var(--p-line); border-radius:5px; padding:11px 13px; margin-top:15px}
+.doc-note .t{font-size:.6rem; font-weight:500; letter-spacing:.05em; color:var(--p-ink)}
+.doc-note ul{margin:6px 0 0; padding-left:13px; display:flex; flex-direction:column; gap:3px}
+.doc-note li{font-size:.585rem; color:var(--p-mut); line-height:1.45}
+.doc-foot{text-align:center; font-size:.615rem; color:var(--p-mut); margin-top:26px}
+.doc-wave{display:block; width:calc(100% + 60px); margin:8px -30px 0; height:26px}
+
+.mod-txt{display:flex; flex-direction:column; gap:16px}
+.cap-t{font-family:var(--disp); font-weight:600; font-size:1.02rem; color:var(--ink); margin-top:8px}
+.caps{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px}
+.caps li{
+  display:flex; align-items:center; gap:13px; background:var(--surface);
+  border:1px solid var(--line); border-radius:var(--pill); box-shadow:var(--sh-1);
+  padding:13px 20px 13px 14px; font-size:.915rem; color:var(--ink);
+}
+.ck{
+  flex:0 0 auto; width:26px; height:26px; border-radius:50%; background:var(--blue-soft);
+  color:var(--blue); display:flex; align-items:center; justify-content:center;
+}
+.ck svg{width:14px; height:14px}
+
+
+/* ---------- one lift for every card and every image ---------- */
+.feat,.sol,.case,.how-it,.tool,.stat,.chain-item,.caps li,.chan,
+.shot-frame,.compo-shot,.arch-scroll,.logos img{
+  transition:transform .35s cubic-bezier(.22,.7,.3,1),
+             box-shadow .35s cubic-bezier(.22,.7,.3,1),
+             border-color .2s ease, filter .25s ease, opacity .25s ease;
+}
+@media (hover:hover){
+  .feat:hover,.sol:hover,.case:hover,.how-it:hover,.tool:hover,.stat:hover,.caps li:hover{
+    transform:translateY(-5px) scale(1.02); box-shadow:var(--sh-2);
+  }
+  .chain-item:hover{transform:translateY(-4px) scale(1.014); box-shadow:var(--sh-2)}
+  .chan:hover{transform:translateY(-5px) scale(1.02); border-color:var(--amber)}
+  .shot-frame:hover,.compo-shot:hover{transform:scale(1.018); box-shadow:var(--sh-3)}
+  .arch-scroll:hover{transform:scale(1.012); box-shadow:var(--sh-2)}
+  .logos img:hover{transform:scale(1.12)}
+}
+.chain-item:focus-visible{transform:translateY(-4px) scale(1.014); box-shadow:var(--sh-2)}
+
+/* ---------- contact ---------- */
+.contact{background:var(--panel); color:var(--panel-ink); border-radius:0}
+.contact .eyebrow{color:var(--amber)}
+.contact h2,.contact .accent{color:var(--panel-ink)}
+.contact .lede{color:var(--panel-ink-2)}
+.ch{display:grid; grid-template-columns:repeat(auto-fit,minmax(272px,1fr)); gap:16px; margin-top:46px}
+.chan{
+  background:var(--panel-2); border:1px solid var(--panel-line); border-radius:var(--r);
+  padding:24px 24px 26px; display:flex; flex-direction:column; gap:9px; text-decoration:none;
+}
+.chan .k{font-family:var(--disp); font-size:.665rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--panel-ink-2)}
+.chan .v{font-family:var(--disp); font-weight:600; font-size:1.02rem; letter-spacing:-.015em; word-break:break-word}
+.chan .d{font-size:.875rem; color:var(--panel-ink-2)}
+.pending{border-bottom:1.5px dashed var(--amber); color:var(--panel-ink-2)}
+
+/* ---------- footer ---------- */
+.ft{background:var(--panel-2); color:var(--panel-ink-2); padding-block:34px}
+.ft-in{display:flex; gap:22px; align-items:center; flex-wrap:wrap; justify-content:space-between}
+.ft-brand{display:flex; align-items:center; gap:16px}
+.ft-brand img{width:78px; height:auto}
+.ft small{font-family:var(--disp); font-size:.74rem; font-weight:500; letter-spacing:.06em}
+.ft a{color:var(--panel-ink); text-decoration:none; font-family:var(--disp); font-size:.85rem; font-weight:500}
+.ft a:hover{text-decoration:underline}
+
+/* ---------- scroll reveal (class added by JS only, so the page reads fine without it) ---------- */
+.reveal{opacity:0}
+.reveal-on{animation:rise 1.35s cubic-bezier(.16,.72,.28,1) var(--d,0ms) both}
+@keyframes rise{from{opacity:0; transform:translateY(30px)} to{opacity:1; transform:none}}
+
+/* ---------- responsive ---------- */
+@media (max-width:980px){
+  .hero-grid{grid-template-columns:1fr}
+  .chain-grid{grid-template-columns:1fr}
+  .penta-box{position:relative; top:auto; max-width:290px}
+}
+@media (max-width:1080px){
+  .login{display:none}
+}
+@media (max-width:900px){
+  .nav{display:none}
+  .login{display:inline-block}
+  .stats-in{grid-template-columns:1fr}
+}
+@media (max-width:900px){
+  .mod{grid-template-columns:1fr; gap:38px}
+  .doc{transform:none; max-width:420px}
+  .doc-wrap{perspective:none}
+}
+@media (max-width:760px){
+  .pop{display:none}
+  .compo-shot{width:100%}
+}
+@media (max-width:620px){
+  .login{display:none}
+}
+@media (max-width:460px){
+  .hdr-in{gap:10px}
+  .brand-clip{width:109px; height:30px}
+  .brand-clip img{width:139px; left:-33px; top:-30px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important; transition-duration:.001ms!important}
+  .reveal{opacity:1; transform:none}
+}
+</style>
+
+<header class="hdr">
+  <div class="wrap hdr-in">
+    <a class="brand" href="#top" aria-label="Lumen Energy Solutions">
+      <span class="brand-clip"><img src="assets/lumen-wordmark.png" alt="Lumen Energy Solutions"></span>
+    </a>
+    <nav class="nav">
+      <a href="#industria" data-en="Industry">Industria</a>
+      <a href="#facturacion" data-en="Billing">Facturación</a>
+      <a href="#cadena" data-en="Value chain">Cadena de valor</a>
+      <a href="#soluciones" data-en="Solutions">Soluciones</a>
+      <a href="#casos" data-en="Cases">Casos</a>
+      <a href="#nosotros" data-en="How we work">Nosotros</a>
+    </nav>
+    <div class="hdr-act">
+      <a class="login" href="https://lumencloud.io" target="_blank" rel="noopener" data-en="Lumen Cloud ↗">Lumen Cloud ↗</a>
+      <button class="lang" id="lang-toggle" type="button" aria-label="Switch to English">EN</button>
+      <a class="btn btn-p btn-sm" href="#contacto" data-en="Book a demo">Agenda una demo</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="wrap hero glow">
+    <div class="hero-grid">
+      <div class="hero-txt">
+        <p class="eyebrow" data-en="IIoT · Energy · Buildings · Industry">IIoT · Energía · Edificios · Industria</p>
+        <h1>
+          <span data-en="Accelerate your Digital">Acelera tu Transformación</span><br>
+          <span class="accent" data-en="Transformation with IoT">Digital con IoT</span>
+        </h1>
+        <p class="lede" data-en="Lumen Energy Solutions covers the entire industrial IoT chain: we meter in the field, build the network, process on site and visualize on our own platform — from the SCADA of a plant's electrical room to the monthly invoice for every tenant in a building. One company, end to end.">Lumen Energy Solutions cubre toda la cadena del IoT industrial: medimos en campo, montamos la red, procesamos en sitio y visualizamos en nuestra propia plataforma — desde el SCADA del cuarto eléctrico de una planta hasta la factura mensual de cada local de un edificio. Una sola empresa, de punta a punta.</p>
+        <div class="hero-cta">
+          <a class="btn btn-p" href="#contacto" data-en="Book a demo">Agenda una demo</a>
+          <a class="btn btn-g" href="#cadena" data-en="See the full chain">Ver la cadena completa</a>
+        </div>
+        <p class="geo"><span>Honduras</span><span class="dot"></span><span data-en="El Salvador">El Salvador</span><span class="dot"></span><span>Guatemala</span></p>
+      </div>
+
+      <div class="hero-art">
+        <img src="assets/plataforma/lumen-cloud-ecosistema.webp" alt="Ecosistema Lumen Cloud: una subestación eléctrica, tableros en laptop y celular, tanques de agua, un edificio de oficinas, una planta industrial y un parque solar y eólico, todos conectados a la plataforma" width="1200" height="1200" fetchpriority="high">
+      </div>
+    </div>
+  </section>
+
+  <!-- CLIENTS -->
+  <hr class="rule">
+  <section class="wrap clients">
+    <div class="clients-in">
+      <p class="eyebrow" data-en="Trusted by operations across Central America">Empresas que confían su operación en nosotros</p>
+      <div class="logos">
+        <img src="assets/clientes/dole.png" alt="Dole">
+        <img src="assets/clientes/texaco.png" alt="Texaco">
+        <img src="assets/clientes/aptiv.jpg" alt="Aptiv">
+        <img src="assets/clientes/parkdale.png" alt="Parkdale">
+        <img src="assets/clientes/diunsa.webp" alt="Diunsa">
+        <img src="assets/clientes/lala.png" alt="Lala">
+        <img src="assets/clientes/lacthosa.png" alt="Lacthosa">
+        <img src="assets/clientes/estrella-azul.jpg" alt="Estrella Azul">
+        <img src="assets/clientes/cahsa.png" alt="Cahsa">
+        <img src="assets/clientes/opc.jpg" alt="Operadora Portuaria Centroamericana">
+        <img src="assets/clientes/finotex.jpeg" alt="Finotex">
+        <img src="assets/clientes/polygroup.png" alt="Polygroup">
+        <img src="assets/clientes/superior-glove.jpg" alt="Superior Glove">
+        <img src="assets/clientes/united-textiles.jpg" alt="United Textiles of America">
+        <img src="assets/clientes/dihego.png" alt="Dihego">
+        <img src="assets/clientes/aliadas.png" alt="Aliadas">
+        <img src="assets/clientes/nhbc.png" alt="NHBC">
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="wrap stats-in">
+      <div class="stat"><span class="n">+1000</span><span class="l" data-en="connected devices">dispositivos conectados</span></div>
+      <div class="stat"><span class="n">+35</span><span class="l" data-en="organizations on the platform, each seeing only its own">organizaciones en la plataforma, cada una viendo solo lo suyo</span></div>
+      <div class="stat"><span class="n">3</span><span class="l" data-en="countries: Honduras, El Salvador and Guatemala">países: Honduras, El Salvador y Guatemala</span></div>
+    </div>
+  </div>
+
+  <!-- INDUSTRY: SCADA, DISTRIBUTION AND SOLAR -->
+  <section class="flag sec glow" id="industria">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow" data-en="Industry">Industria</p>
+        <h2 data-en="The plant's energy, from the electrical room to the solar array">La energía de la planta, del cuarto eléctrico al techo solar</h2>
+        <p class="lede" data-en="Every transformer, feeder and generation source on one screen and in real time — so maintenance sees what the switchboard is doing and management sees what each area actually costs.">Cada transformador, alimentador y fuente de generación en una sola pantalla y en tiempo real — para que mantenimiento vea qué está haciendo el tablero y la gerencia vea cuánto cuesta de verdad cada área.</p>
+      </div>
+
+      <div class="flag-grid" data-reveal>
+        <div class="feat">
+          <span class="feat-n" aria-hidden="true">01</span>
+          <span class="feat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4" width="17" height="12" rx="2"/><path d="M8 20h8M12 16v4"/><path d="M12.8 6.8 10.2 10.4h3.6l-2.6 3.6"/></svg></span>
+          <h3 data-en="The electrical room, live">El cuarto eléctrico en vivo</h3>
+          <p data-en="A SCADA single-line diagram with every transformer and its main meter: power, current, voltage, power factor and harmonic distortion, updated every few seconds and flagged the moment a value leaves its range.">Un unifilar SCADA con cada transformador y su medidor principal: potencia, corriente, voltaje, factor de potencia y distorsión armónica, actualizados cada pocos segundos y señalados en cuanto un valor sale de rango.</p>
+        </div>
+        <div class="feat">
+          <span class="feat-n" aria-hidden="true">02</span>
+          <span class="feat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.8" r="1.9"/><path d="M12 6.7v4.1M5.5 10.8h13M5.5 10.8v4.4M12 10.8v4.4M18.5 10.8v4.4"/><circle cx="5.5" cy="17.2" r="1.9"/><circle cx="12" cy="17.2" r="1.9"/><circle cx="18.5" cy="17.2" r="1.9"/></svg></span>
+          <h3 data-en="Distribution, down to the process">Distribución hasta el proceso</h3>
+          <p data-en="Total plant consumption broken down by substation, transformer, feeder and production area. The monthly bill stops being one number and becomes a map of where the energy goes.">El consumo total de la planta desglosado por subestación, transformador, alimentador y área de producción. La factura del mes deja de ser un solo número y se vuelve un mapa de a dónde va la energía.</p>
+        </div>
+        <div class="feat">
+          <span class="feat-n" aria-hidden="true">03</span>
+          <span class="feat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.8"/><path d="M12 3.2v2M12 18.8v2M3.2 12h2M18.8 12h2M5.8 5.8l1.4 1.4M16.8 16.8l1.4 1.4M5.8 18.2l1.4-1.4M16.8 7.2l1.4-1.4"/></svg></span>
+          <h3 data-en="Solar, grid and generator, kept apart">Solar, red y generador, por separado</h3>
+          <p data-en="Solar generation metered apart from the grid and the diesel generator: how much the plant produces, how much it buys, how much it exports and what share of each day came from each source.">La generación solar medida aparte de la red y del generador diésel: cuánto produce la planta, cuánto compra, cuánto exporta y qué porcentaje de cada día vino de cada fuente.</p>
+        </div>
+        <div class="feat">
+          <span class="feat-n" aria-hidden="true">04</span>
+          <span class="feat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 20V11M9.5 20V7M14.5 20v-6M19.5 20V4"/><path d="M3 4.2h18" stroke-dasharray="1.5 2.6"/></svg></span>
+          <h3 data-en="Demand and power factor">Demanda y factor de potencia</h3>
+          <p data-en="Weekly peak demand and power factor at the delivery point, so the surcharge is seen coming instead of discovered on the invoice — and capacitor banks are sized with data.">Demanda máxima semanal y factor de potencia en el punto de entrega, para ver venir el recargo en vez de descubrirlo en la factura — y dimensionar los bancos de capacitores con datos.</p>
+        </div>
+        <div class="feat">
+          <span class="feat-n" aria-hidden="true">05</span>
+          <span class="feat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 16.4V11a5.8 5.8 0 0 1 11.6 0v5.4l1.6 2H4.6z"/><path d="M10 20.6a2.1 2.1 0 0 0 4 0"/></svg></span>
+          <h3 data-en="Alerts before the failure">Alertas antes de la falla</h3>
+          <p data-en="Power factor out of range, harmonic distortion climbing, a meter that stops reporting: an email the moment it happens, plus a daily status of every device, so nobody finds out from a week-old gap in the data.">Factor de potencia fuera de rango, distorsión armónica subiendo, un medidor que deja de reportar: un correo en el momento en que pasa, más un estado diario de todos los equipos, para que nadie se entere por un hueco de una semana en los datos.</p>
+        </div>
+        <div class="feat">
+          <span class="feat-n" aria-hidden="true">06</span>
+          <span class="feat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.4" y="5.4" width="17.2" height="13.2" rx="2"/><path d="m4 7 8 6 8-6"/></svg></span>
+          <h3 data-en="Reports that arrive on their own">Reportes que llegan solos</h3>
+          <p data-en="A weekly report by email with energy per feeder and per source, and a continuity check built in: if a meter left a gap, the report says so before anyone makes a decision on it.">Un reporte semanal por correo con la energía por alimentador y por fuente, y una validación de continuidad incorporada: si un medidor dejó un hueco, el reporte lo dice antes de que alguien tome una decisión con él.</p>
+        </div>
+      </div>
+
+      <figure data-reveal class="shot shot-wide">
+        <div class="compo">
+          <div class="compo-shot">
+            <img src="assets/plataforma/industria-energia.jpg" alt="Resumen de energía de una planta industrial: potencia de red, solar y generador en tiempo real, demanda máxima, energía semanal por fuente y porcentaje de consumo solar contra red" loading="lazy" width="1600" height="778">
+          </div>
+          <div class="pop pop-1"><span class="k" data-en="Grid · real time">Red · tiempo real</span><span class="v">456.16<i>kW</i></span></div>
+          <div class="pop pop-2"><span class="k" data-en="Solar · real time">Solar · tiempo real</span><span class="v">61.31<i>kW</i></span></div>
+          <div class="pop pop-3"><span class="k" data-en="Power factor">Factor de potencia</span><span class="v"><em>0.98</em></span></div>
+          <div class="pop pop-4"><span class="k" data-en="Solar · last week">Solar · semana pasada</span><span class="v">24.89<i>MWh</i></span></div>
+        </div>
+        <figcaption data-en="Energy overview of a textile plant: grid, solar and generator in real time, and 18% of the day's consumption from its own solar array.">Resumen de energía de una planta textil: red, solar y generador en tiempo real, y el 18 % del consumo del día desde su propia planta solar.</figcaption>
+      </figure>
+
+      <figure data-reveal class="shot shot-wide">
+        <div class="compo compo-alt">
+          <div class="compo-shot">
+            <img src="assets/plataforma/industria-scada.jpg" alt="SCADA de un cuarto eléctrico: unifilar con cuatro transformadores y sus medidores principales en vivo, junto a la potencia y energía del día por transformador" loading="lazy" width="1600" height="779">
+          </div>
+          <div class="pop pop-1"><span class="k" data-en="Transformers live">Transformadores en vivo</span><span class="v">4</span></div>
+          <div class="pop pop-2"><span class="k" data-en="Energy · today">Energía · hoy</span><span class="v">48.24<i>MWh</i></span></div>
+          <div class="pop pop-3"><span class="k" data-en="Max THD">THD máx.</span><span class="v"><em>2.7</em><i>%</i></span></div>
+        </div>
+        <figcaption data-en="The electrical room as a SCADA: every transformer's main meter live, and the day's energy per transformer.">El cuarto eléctrico como SCADA: el medidor principal de cada transformador en vivo, y la energía del día por transformador.</figcaption>
+      </figure>
+
+      <!-- PREDICTIVE MAINTENANCE -->
+      <div class="sec-head sub-head" id="predictivo">
+        <p class="eyebrow" data-en="Predictive maintenance">Mantenimiento predictivo</p>
+        <h2 data-en="The motor warns weeks before it stops">El motor avisa semanas antes de pararse</h2>
+        <p class="lede" data-en="Vibration and temperature on the critical machines, trended against ISO limits and read through the spectrum — so the stop gets scheduled instead of suffered.">Vibración y temperatura en las máquinas críticas, con tendencia contra los límites ISO y leída a través del espectro — para que el paro se programe en vez de sufrirse.</p>
+      </div>
+
+      <div class="flag-grid" data-reveal>
+        <div class="feat">
+          <span class="feat-n" aria-hidden="true">01</span>
+          <span class="feat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12h2.8l2.2-6 3.2 12 2.8-9.5 1.9 3.5h6.1"/></svg></span>
+          <h3 data-en="Vibration against ISO 20816">Vibración contra ISO 20816</h3>
+          <p data-en="Wireless sensors on each bearing — drive end and free end — measuring vibration velocity and temperature. Every point sits in its ISO zone, A to D, so the whole plant reads as a traffic light.">Sensores inalámbricos en cada rodamiento — lado acople y lado libre — midiendo velocidad de vibración y temperatura. Cada punto queda en su zona ISO, de la A a la D, y la planta entera se lee como un semáforo.</p>
+        </div>
+        <div class="feat">
+          <span class="feat-n" aria-hidden="true">02</span>
+          <span class="feat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V14M8 20V6M12 20v-9M16 20v-5M20 20v-3"/></svg></span>
+          <h3 data-en="The spectrum explains the why">El espectro explica el porqué</h3>
+          <p data-en="Velocity spectrum and envelope per axis, with the running-speed harmonics marked. The platform suggests the likely fault — imbalance, misalignment, looseness or bearing wear — and what to check first.">Espectro de velocidad y envolvente por eje, con los armónicos de la velocidad de giro marcados. La plataforma sugiere la falla probable — desbalance, desalineación, holgura o desgaste de rodamiento — y qué revisar primero.</p>
+        </div>
+        <div class="feat">
+          <span class="feat-n" aria-hidden="true">03</span>
+          <span class="feat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4.5h6v3H9z"/><path d="M15 5.5h2.5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1v-13a1 1 0 0 1 1-1H9"/><path d="M9 13l2 2 4-4"/></svg></span>
+          <h3 data-en="From alarm to work order">De la alarma a la orden de trabajo</h3>
+          <p data-en="An alarm becomes a work order with the machine, the finding and the recommended action, and closes with what the technician found — so the next diagnosis learns from the last one.">Una alarma se convierte en orden de trabajo con la máquina, el hallazgo y la acción recomendada, y se cierra con lo que encontró el técnico — para que el siguiente diagnóstico aprenda del anterior.</p>
+        </div>
+      </div>
+
+      <figure data-reveal class="shot shot-wide">
+        <div class="compo">
+          <div class="compo-shot">
+            <img src="assets/plataforma/pdm-tendencia.jpg" alt="Ficha de un ventilador de torre en el módulo de mantenimiento predictivo: velocidad RMS de 4.84 mm/s en zona crítica D según ISO 20816, temperatura del rodamiento y tendencia de 60 días cruzando los umbrales" loading="lazy" width="1366" height="786">
+          </div>
+          <div class="pop pop-1"><span class="k" data-en="RMS velocity">Velocidad RMS</span><span class="v">4.84<i>mm/s</i></span></div>
+          <div class="pop pop-2"><span class="k" data-en="ISO 20816 zone">Zona ISO 20816</span><span class="v"><em>D</em></span></div>
+          <div class="pop pop-3"><span class="k" data-en="Bearing temp.">Temp. rodamiento</span><span class="v">57.2<i>°C</i></span></div>
+        </div>
+        <figcaption data-en="A tower fan crossing from zone B into D over sixty days — visible as a curve long before it becomes a failure.">Un ventilador de torre pasando de la zona B a la D en sesenta días — visible como curva mucho antes de volverse falla.</figcaption>
+      </figure>
+
+      <figure data-reveal class="shot shot-wide">
+        <div class="compo compo-alt">
+          <div class="compo-shot">
+            <img src="assets/plataforma/pdm-espectro.jpg" alt="Espectro de velocidad del eje vertical con ocho armónicos consecutivos de la velocidad de giro y el diagnóstico automático: holgura mecánica con 90 % de confianza" loading="lazy" width="1390" height="700">
+          </div>
+          <div class="pop pop-1"><span class="k" data-en="Diagnosis">Diagnóstico</span><span class="v" data-en="Looseness">Holgura</span></div>
+          <div class="pop pop-2"><span class="k" data-en="Confidence">Confianza</span><span class="v"><em>90</em><i>%</i></span></div>
+          <div class="pop pop-3"><span class="k" data-en="Harmonics of 1x">Armónicos del 1x</span><span class="v">8</span></div>
+        </div>
+        <figcaption data-en="The spectrum behind the alarm: eight harmonics of running speed point to mechanical looseness, with what to check first.">El espectro detrás de la alarma: ocho armónicos de la velocidad de giro apuntan a holgura mecánica, con qué revisar primero.</figcaption>
+      </figure>
+
+      <div class="flag-cta">
+        <a class="btn btn-p" href="#contacto" data-en="Book a demo">Agenda una demo</a>
+        <a class="btn btn-g" href="#casos" data-en="See it in the field">Ver casos reales</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BILLING -->
+  <section class="flag sec glow" id="facturacion">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow" data-en="Billing">Facturación</p>
+        <h2 data-en="Submetering and billing for buildings, plazas and shopping centers">Submedición y facturación para edificios, plazas y centros comerciales</h2>
+        <p class="lede" data-en="One meter per unit, one invoice per month — no reading visits, no spreadsheets, no arguments over who consumed what.">Un medidor por local, una factura por mes — sin visitas de lectura, sin hojas de Excel y sin discusiones sobre quién consumió qué.</p>
+      </div>
+
+      <div class="flag-grid" data-reveal>
+        <div class="feat">
+          <span class="feat-n" aria-hidden="true">01</span>
+          <span class="feat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 12l4.2-4.2"/><path d="M12 3.5v1.6M20.5 12h-1.6M12 20.5v-1.6M3.5 12h1.6"/></svg></span>
+          <h3 data-en="Metering per unit">Medición por local</h3>
+          <p data-en="One meter per tenant or circuit, reading every minute instead of once a month. Energy, demand, power factor and, where it matters, water and gas on the same system.">Un medidor por inquilino o circuito, leyendo cada minuto en vez de una vez al mes. Energía, demanda, factor de potencia y, donde hace falta, agua y gas en el mismo sistema.</p>
+        </div>
+        <div class="feat">
+          <span class="feat-n" aria-hidden="true">02</span>
+          <span class="feat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11.4 3.2 4 5.4v5.1c0 4.4 3 8.4 7.4 9.9 4.4-1.5 7.4-5.5 7.4-9.9V5.4z"/><path d="M9 12.4l2.2 2.2L15.4 10"/></svg></span>
+          <h3 data-en="The tariff applied automatically">La tarifa aplicada sola</h3>
+          <p data-en="The current tariff schedule, demand charge, power factor and surcharges: the same calculation the utility runs on the building's meter, replicated unit by unit.">El pliego tarifario vigente, el cargo por demanda, el factor de potencia y los recargos: el mismo cálculo que hace la distribuidora en el medidor del edificio, replicado local por local.</p>
+        </div>
+        <div class="feat">
+          <span class="feat-n" aria-hidden="true">03</span>
+          <span class="feat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.4"/><path d="M12 3.6V12l6.2 5.7"/></svg></span>
+          <h3 data-en="Common areas prorated">Áreas comunes prorrateadas</h3>
+          <p data-en="Elevators, pumps, corridor lighting and air conditioning split by the rule management defines — by area, by unit or by a fixed share.">Ascensores, bombas, iluminación de pasillos y aire acondicionado repartidos según la regla que defina la administración: por área, por local o por porcentaje fijo.</p>
+        </div>
+        <div class="feat">
+          <span class="feat-n" aria-hidden="true">04</span>
+          <span class="feat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3.4h9.4L19 8v12.6H5z"/><path d="M14.2 3.6V8H19"/><path d="M8.6 13.4h6.8M8.6 16.8h4.4"/></svg></span>
+          <h3 data-en="Invoice ready to send">Factura lista para enviar</h3>
+          <p data-en="A PDF per unit with the period breakdown, consumption, demand and amount. Generated and emailed on schedule, without anyone opening the platform.">Un PDF por local con el detalle del período, consumo, demanda y monto. Se genera y se envía por correo en la fecha acordada, sin que nadie tenga que entrar a la plataforma.</p>
+        </div>
+        <div class="feat">
+          <span class="feat-n" aria-hidden="true">05</span>
+          <span class="feat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.6" cy="10.6" r="6.6"/><path d="M15.4 15.4 20.5 20.5"/><path d="M7.8 11.6l2-2.4 1.9 1.7 2.1-3"/></svg></span>
+          <h3 data-en="Consumption that stands up to scrutiny">Consumo auditable</h3>
+          <p data-en="The tenant sees their own curve, hour by hour. Fewer disputes — and the ones that come in get settled with data instead of opinions.">El inquilino ve su propia curva de consumo, hora por hora. Menos reclamos — y los que llegan se resuelven con datos, no con opiniones.</p>
+        </div>
+        <div class="feat">
+          <span class="feat-n" aria-hidden="true">06</span>
+          <span class="feat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.6c3 3.6 5.4 6.4 5.4 9.1a5.4 5.4 0 0 1-10.8 0c0-2.7 2.4-5.5 5.4-9.1z"/><path d="M12 9.8v3.4M12 16.1h.01"/></svg></span>
+          <h3 data-en="Leaks and anomalies">Fugas y anomalías</h3>
+          <p data-en="Alerts when a unit consumes outside its pattern, when water keeps running overnight, or when a meter simply stops reporting — before it becomes a billing gap.">Alertas cuando un local consume fuera de su patrón, cuando el agua sigue corriendo de madrugada o cuando un medidor deja de reportar — antes de que se vuelva un hueco en la factura.</p>
+        </div>
+      </div>
+
+
+      <figure data-reveal class="shot shot-wide">
+        <div class="compo">
+          <div class="compo-shot">
+            <img src="assets/plataforma/reports-dashboard.jpg" alt="Lumen Reports: consumo de energía y agua del mes y estado de los medidores de un edificio" loading="lazy" width="1400" height="866">
+          </div>
+          <div class="pop pop-1"><span class="k" data-en="Energy · this month">Energía · este mes</span><span class="v">26,400.40<i>kWh</i></span></div>
+          <div class="pop pop-2"><span class="k" data-en="Water · this month">Agua · este mes</span><span class="v">297.39<i>m³</i></span></div>
+          <div class="pop pop-3"><span class="k" data-en="Meters reporting">Medidores reportando</span><span class="v"><em>129/129</em></span></div>
+          <div class="pop pop-4"><span class="k" data-en="Prebills · August">Prefacturas · agosto</span><span class="v">67</span></div>
+        </div>
+        <figcaption data-en="Lumen Reports: the month's energy and water, and 129 of 129 meters reporting.">Lumen Reports: energía y agua del mes, y 129 de 129 medidores reportando.</figcaption>
+      </figure>
+
+      <figure data-reveal class="shot shot-wide">
+        <div class="compo compo-alt">
+          <div class="compo-shot">
+            <img src="assets/plataforma/reports-historial.jpg" alt="Historial de reportes y prefacturas generadas en Lumen Reports" loading="lazy" width="1400" height="866">
+          </div>
+          <div class="pop pop-1"><span class="k" data-en="Runs on record">Corridas registradas</span><span class="v">88</span></div>
+          <div class="pop pop-2"><span class="k" data-en="Output formats">Formatos de salida</span><span class="v"><em>PDF</em> · XLSX</span></div>
+          <div class="pop pop-3"><span class="k" data-en="Closed period">Período cerrado</span><span class="v">1–31 ago</span></div>
+        </div>
+        <figcaption data-en="Every run is recorded, and any of them can be regenerated.">Cada corrida queda registrada, y cualquiera se puede regenerar.</figcaption>
+      </figure>
+
+      <div class="flag-cta">
+        <a class="btn btn-p" href="#contacto" data-en="Book a demo">Agenda una demo</a>
+        <a class="btn btn-g" href="#casos" data-en="See it in the field">Ver casos reales</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRORRATEO Y PREFACTURA -->
+  <section class="sec glow" id="prefactura">
+    <div class="wrap">
+      <div class="mod">
+        <div class="doc-wrap" data-reveal>
+          <article class="doc" aria-label="Ejemplo de proforma generada por Lumen para un local">
+            <div class="doc-head">
+              <div>
+                <p class="doc-site">Torre Central</p>
+                <p class="doc-sub" data-en="Consolidated summary for the period">Resumen consolidado del período</p>
+              </div>
+              <div class="doc-brand">
+                <span class="doc-kind">PROFORMA</span>
+                <span class="doc-kind-2" data-en="GENERAL SUMMARY">RESUMEN GENERAL</span>
+              </div>
+            </div>
+
+            <dl class="doc-meta">
+              <div><dt data-en="Proforma no.:">No. Proforma:</dt><dd>R-202608-CC81</dd></div>
+              <div><dt data-en="Issued:">Fecha de emisión:</dt><dd>04/08/2026</dd></div>
+              <div><dt data-en="Period:">Período de consumo:</dt><dd>01/07/2026 — 01/08/2026</dd></div>
+            </dl>
+
+            <p class="doc-sec" data-en="SERVICES SUMMARY">RESUMEN DE SERVICIOS</p>
+            <table class="doc-tbl">
+              <thead>
+                <tr>
+                  <th data-en="Service">Servicio</th>
+                  <th data-en="Usage">Consumo</th>
+                  <th data-en="Amount (L)">Importe (L)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td data-en="Water">Agua</td><td>3.79 m³</td><td>L 167.18</td></tr>
+                <tr><td data-en="Energy">Energía</td><td>371.20 kWh</td><td>L 2,134.81</td></tr>
+                <tr class="sub"><td colspan="2" data-en="Subtotal">Subtotal de servicios</td><td>L 2,301.99</td></tr>
+              </tbody>
+              <tfoot>
+                <tr><td colspan="2" data-en="TOTAL DUE (L)">TOTAL A PAGAR (L)</td><td class="tot">L 2,301.99</td></tr>
+              </tfoot>
+            </table>
+
+            <div class="doc-note">
+              <p class="t" data-en="IMPORTANT">MENSAJES IMPORTANTES</p>
+              <ul>
+                <li data-en="This document is a PROFORMA. It carries no fiscal or legal validity.">Este documento es una PROFORMA. No tiene validez fiscal ni legal.</li>
+                <li data-en="Amounts are calculated from the meter readings of the period shown.">Los importes se calculan a partir de las lecturas del período indicado.</li>
+                <li data-en="For questions or corrections, contact support.">Para consultas o aclaraciones, contacte al soporte.</li>
+              </ul>
+            </div>
+
+            <p class="doc-foot">Powered by Lumen Cloud</p>
+            <svg class="doc-wave" viewBox="0 0 400 30" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M0 15 C 60 2, 120 26, 200 15 S 330 3, 400 12 L400 30 L0 30 Z" fill="#dfe6ef"></path>
+              <path d="M0 21 C 70 9, 130 31, 205 21 S 335 10, 400 19 L400 30 L0 30 Z" fill="#c9d5e4"></path>
+            </svg>
+          </article>
+        </div>
+
+        <div class="mod-txt">
+          <p class="eyebrow" data-en="The deliverable">El entregable</p>
+          <h2><span data-en="Prorating and ">Prorrateo y </span><span class="accent" data-en="prebilling">prefactura</span></h2>
+          <p class="lede" data-en="The month closes and every unit gets its own document: what it consumed, what it owes, and over which dates. Nobody walks the building with a clipboard and nobody retypes a reading into a spreadsheet.">Cierra el mes y cada local recibe su propio documento: qué consumió, cuánto debe y entre qué fechas. Nadie recorre el edificio con una tabla ni transcribe una lectura a una hoja de cálculo.</p>
+          <p class="cap-t" data-en="What the module does">Lo que hace el módulo</p>
+          <ul class="caps">
+            <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"></path></svg></span><span data-en="Common areas prorated by the rule management sets">Prorratea las áreas comunes según la regla que ponga la administración</span></li>
+            <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"></path></svg></span><span data-en="Individual usage computed from the period's own readings">Calcula el consumo individual con las lecturas del propio período</span></li>
+            <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"></path></svg></span><span data-en="Water and energy on one document, with the tariff already applied">Junta agua y energía en un solo documento, con la tarifa ya aplicada</span></li>
+            <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"></path></svg></span><span data-en="One numbered proforma per unit, generated in a single run">Una proforma numerada por local, generadas todas en una sola corrida</span></li>
+            <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"></path></svg></span><span data-en="No manual transcription, so no typing errors to argue about">Sin transcripción manual, así que no hay errores de digitación que discutir</span></li>
+            <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"></path></svg></span><span data-en="Billing goes out the day the period closes, not two weeks later">El cobro sale el día que cierra el período, no dos semanas después</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUE CHAIN -->
+  <section class="sec" id="cadena">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow" data-en="The value chain">La cadena de valor</p>
+        <h2 data-en="Five links. One company responsible for all of them.">Cinco eslabones. Una sola empresa responsable de todos.</h2>
+        <p class="lede" data-en="Most IIoT projects break at the seams between vendors — the one who sells the sensor, the one who runs the network, the one who builds the dashboard. We cover the five links ourselves, which is why nobody gets to point at someone else.">La mayoría de los proyectos de IIoT se rompen en las costuras entre proveedores: el que vende el sensor, el que monta la red, el que hace el tablero. Nosotros cubrimos los cinco eslabones, y por eso nadie puede señalar a otro.</p>
+      </div>
+
+      <div class="chain-grid">
+        <div class="penta-col">
+        <div class="penta-box">
+          <svg class="penta" viewBox="0 0 300 300" role="img" aria-label="Pentágono de la cadena de valor de Lumen, cinco lados">
+            <line class="side s1" x1="129.2" y1="31.8" x2="255.9" y2="93.7"></line>
+            <line class="side s2" x1="255.9" y1="93.7" x2="236.3" y2="233.4"></line>
+            <line class="side s3" x1="236.3" y1="233.4" x2="97.4" y2="257.9"></line>
+            <line class="side s4" x1="97.4" y1="257.9" x2="31.2" y2="133.3"></line>
+            <line class="side s5" x1="31.2" y1="133.3" x2="129.2" y2="31.8"></line>
+            <g class="badges">
+              <g data-side="1"><circle class="badge" cx="204.8" cy="37.5" r="13"></circle><text class="bnum" x="204.8" y="37.5">1</text></g>
+              <g data-side="2"><circle class="badge" cx="273.8" cy="167.5" r="13"></circle><text class="bnum" x="273.8" y="167.5">2</text></g>
+              <g data-side="3"><circle class="badge" cx="171.8" cy="273.3" r="13"></circle><text class="bnum" x="171.8" y="273.3">3</text></g>
+              <g data-side="4"><circle class="badge" cx="39.6" cy="208.7" r="13"></circle><text class="bnum" x="39.6" y="208.7">4</text></g>
+              <g data-side="5"><circle class="badge" cx="60.0" cy="63.1" r="13"></circle><text class="bnum" x="60.0" y="63.1">5</text></g>
+            </g>
+          </svg>
+          <div class="readout" id="readout">
+            <span class="rn" id="ro-n">5</span>
+            <span class="rl" id="ro-l" data-en="links, one provider">eslabones, un solo proveedor</span>
+          </div>
+        </div>
+        </div>
+
+        <div class="chain-list" id="chain-list" data-reveal>
+          <div class="chain-item" data-i="1" tabindex="0">
+            <span class="bar"></span>
+            <div class="chain-body">
+              <div class="chain-top">
+                <span class="chain-i">01</span>
+                <span class="chain-name" data-en="Field metering">Medición en campo</span>
+              </div>
+              <p data-en="Three-phase meters, current transformers, and sensors for temperature, vibration, door state, level and water or gas pulses. We choose the equipment and we install it — the work inside the switchboard is ours, not the client's electrician's problem.">Medidores trifásicos, transformadores de corriente y sensores de temperatura, vibración, puerta, nivel y pulsos de agua o gas. Nosotros escogemos el equipo y nosotros lo instalamos: el trabajo dentro del tablero es nuestro, no del electricista del cliente.</p>
+              <div class="tags"><span class="tag">Modbus RTU</span><span class="tag" data-en="pulse">pulsos</span><span class="tag">4–20 mA</span><span class="tag">LoRaWAN</span></div>
+            </div>
+          </div>
+
+          <div class="chain-item" data-i="2" tabindex="0">
+            <span class="bar"></span>
+            <div class="chain-body">
+              <div class="chain-top">
+                <span class="chain-i">02</span>
+                <span class="chain-name" data-en="Connectivity">Conectividad</span>
+              </div>
+              <p data-en="A private LoRaWAN network on site with our own gateways, or Modbus TCP over the building's network. We don't depend on the client opening up their IT, and we don't need every meter to have its own internet connection.">Red LoRaWAN privada en sitio con nuestros propios gateways, o Modbus TCP sobre la red del edificio. No dependemos de que el cliente nos abra su TI ni de que cada medidor tenga su propia conexión a internet.</p>
+              <div class="tags"><span class="tag">LoRaWAN US915</span><span class="tag">Modbus TCP</span><span class="tag">MQTT</span><span class="tag" data-en="cellular">celular</span></div>
+            </div>
+          </div>
+
+          <div class="chain-item" data-i="3" tabindex="0">
+            <span class="bar"></span>
+            <div class="chain-body">
+              <div class="chain-top">
+                <span class="chain-i">03</span>
+                <span class="chain-name" data-en="On-site edge">Edge en sitio</span>
+              </div>
+              <p data-en="Our own equipment on site normalizes, validates and stores what the sensors read. If the internet goes down it keeps metering and syncs when it comes back, so no billing period ends up with a hole in it.">Un equipo nuestro en el sitio normaliza, valida y almacena lo que leen los sensores. Si se cae el internet sigue midiendo y sincroniza al volver, para que ningún período de facturación quede con un hueco.</p>
+              <div class="tags"><span class="tag">ChirpStack</span><span class="tag">Node-RED</span><span class="tag" data-en="local buffer">buffer local</span></div>
+            </div>
+          </div>
+
+          <div class="chain-item" data-i="4" tabindex="0">
+            <span class="bar"></span>
+            <div class="chain-body">
+              <div class="chain-top">
+                <span class="chain-i">04</span>
+                <span class="chain-name">Lumen Cloud</span>
+              </div>
+              <p data-en="Our platform. An asset hierarchy that mirrors the real building — site, floor, unit, circuit — dashboards per user profile, and alarms with thresholds and context. Each client sees only their own operation.">Nuestra plataforma. Una jerarquía de activos que refleja el edificio real — sitio, piso, local, circuito —, tableros por perfil de usuario y alarmas con umbral y contexto. Cada cliente ve únicamente su operación.</p>
+              <div class="tags"><span class="tag" data-en="dashboards">tableros</span><span class="tag" data-en="alarms">alarmas</span><span class="tag">API</span><span class="tag">multi-tenant</span></div>
+            </div>
+          </div>
+
+          <div class="chain-item" data-i="5" tabindex="0">
+            <span class="bar"></span>
+            <div class="chain-body">
+              <div class="chain-top">
+                <span class="chain-i">05</span>
+                <span class="chain-name" data-en="Reporting and billing">Reportes y facturación</span>
+              </div>
+              <p data-en="Where data turns into a decision: KPIs, weekly and monthly reports that send themselves, per-unit billing, and integration with the client's ERP or accounting system so the invoice comes out of their own books.">Donde el dato se vuelve decisión: KPIs, reportes semanales y mensuales que se envían solos, facturación por local e integración con el ERP o el sistema contable del cliente, para que la factura salga de sus propios libros.</p>
+              <div class="tags"><span class="tag" data-en="automatic reports">reportes automáticos</span><span class="tag" data-en="billing">facturación</span><span class="tag" data-en="ERP API">API a ERP</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <figure data-reveal class="arch">
+        <div class="arch-scroll">
+          <svg viewBox="0 0 1310 425" role="img" aria-label="Arquitectura de una instalación Lumen: el medidor ultrasónico de agua, el medidor de energía de riel DIN y los sensores de temperatura y vibración llegan por LoRaWAN a un gateway propio; los medidores que ya estaban instalados se leen por Modbus RTU o TCP sobre la red del edificio; ambos caminos entran a un equipo edge en sitio que normaliza, valida y almacena; el edge envía a Lumen Cloud por HTTPS con buffer si se cae el enlace; y Lumen Cloud produce tableros, reportes automáticos, prefacturas en PDF y una API hacia el ERP del cliente, además de devolver comandos de control al edge.">
+            <text class="ad-stage s1" x="145" y="20">01 · EN CAMPO</text>
+            <text class="ad-stage s2" x="430" y="20">02 · CONECTIVIDAD</text>
+            <text class="ad-stage s3" x="690" y="20">03 · EDGE EN SITIO</text>
+            <text class="ad-stage s4" x="950" y="20">04 · LUMEN CLOUD</text>
+            <text class="ad-stage s5" x="1200" y="20">05 · SALIDAS</text>
+
+            <rect class="ad-box b1" x="20" y="30" width="250" height="74" rx="11"></rect>
+            <image href="assets/hw/medidor-agua-bove.png" x="32" y="40" width="54" height="54" preserveAspectRatio="xMidYMid meet"></image>
+            <text class="ad-t" x="100" y="64">Medidor de agua</text>
+            <text class="ad-sub" x="100" y="81">ultrasónico · LoRaWAN</text>
+
+            <rect class="ad-box b1" x="20" y="116" width="250" height="74" rx="11"></rect>
+            <image href="assets/hw/medidor-energia.png" x="32" y="126" width="54" height="54" preserveAspectRatio="xMidYMid meet"></image>
+            <text class="ad-t" x="100" y="150">Medidor de energía</text>
+            <text class="ad-sub" x="100" y="167">riel DIN · LoRaWAN</text>
+
+            <rect class="ad-box b1" x="20" y="202" width="250" height="74" rx="11"></rect>
+            <g class="ad-ico" transform="translate(59,239)">
+              <path d="M-19 -11 q 9.5 -8 19 0 t 19 0"></path>
+              <path d="M-19 0 q 9.5 -8 19 0 t 19 0"></path>
+              <path d="M-19 11 q 9.5 -8 19 0 t 19 0"></path>
+            </g>
+            <text class="ad-t" x="100" y="236">Sensores LoRaWAN</text>
+            <text class="ad-sub" x="100" y="253">temperatura · vibración</text>
+
+            <rect class="ad-box b1" x="20" y="288" width="250" height="74" rx="11"></rect>
+            <image href="assets/hw/schneider-pm5100.png" x="32" y="298" width="54" height="54" preserveAspectRatio="xMidYMid meet"></image>
+            <text class="ad-t" x="100" y="322">Medición existente</text>
+            <text class="ad-sub" x="100" y="339">Modbus RTU o TCP</text>
+
+            <rect class="ad-box b2" x="330" y="116" width="200" height="74" rx="11"></rect>
+            <image href="assets/hw/gateway-ug65.png" x="338" y="129" width="48" height="48" preserveAspectRatio="xMidYMid meet"></image>
+            <text class="ad-t" x="394" y="147">Gateway</text>
+            <text class="ad-sub" x="394" y="163">LoRaWAN US915</text>
+            <text class="ad-sub" x="394" y="177">propio, en el sitio</text>
+
+            <rect class="ad-box b2" x="330" y="288" width="200" height="74" rx="11"></rect>
+            <g class="ad-net" transform="translate(362,325)">
+              <path d="M-15 -9 H 15"></path>
+              <path d="M-11 -9 V -2"></path>
+              <path d="M0 -9 V -2"></path>
+              <path d="M11 -9 V -2"></path>
+              <rect x="-15" y="-2" width="8" height="7" rx="1.5"></rect>
+              <rect x="-4" y="-2" width="8" height="7" rx="1.5"></rect>
+              <rect x="7" y="-2" width="8" height="7" rx="1.5"></rect>
+            </g>
+            <text class="ad-t" x="394" y="322">Red del edificio</text>
+            <text class="ad-sub" x="394" y="340">RS-485 · Modbus TCP</text>
+
+            <rect class="ad-box b3" x="590" y="202" width="200" height="74" rx="11"></rect>
+            <image href="assets/hw/edge-seeed.png" x="598" y="215" width="48" height="48" preserveAspectRatio="xMidYMid meet"></image>
+            <text class="ad-t" x="654" y="233">Edge en sitio</text>
+            <text class="ad-sub" x="654" y="249">normaliza y valida</text>
+            <text class="ad-sub" x="654" y="263">almacena sin red</text>
+
+            <rect class="ad-cloud" x="850" y="191" width="200" height="96" rx="14"></rect>
+            <g class="lc-mark" transform="translate(860,217) scale(1.1)">
+              <line class="lc1" x1="16.87" y1="2.27" x2="35.89" y2="11.55"></line>
+              <line class="lc2" x1="35.89" y1="11.55" x2="32.95" y2="32.50"></line>
+              <line class="lc3" x1="32.95" y1="32.50" x2="12.11" y2="36.18"></line>
+              <line class="lc4" x1="12.11" y1="36.18" x2="2.17" y2="17.49"></line>
+              <line class="lc5" x1="2.17" y1="17.49" x2="16.87" y2="2.27"></line>
+              <rect class="lcb" x="13.4" y="22" width="3.4" height="6" rx="1"></rect>
+              <rect class="lcb" x="18.4" y="17.5" width="3.4" height="10.5" rx="1"></rect>
+              <rect class="lcb" x="23.4" y="13" width="3.4" height="15" rx="1"></rect>
+            </g>
+            <text class="ad-ct2" x="916" y="232">Lumen Cloud</text>
+            <text class="ad-cs2" x="916" y="250">jerarquía de activos</text>
+            <text class="ad-cs2" x="916" y="265">alarmas · tarifas</text>
+
+            <rect class="ad-box b5" x="1110" y="129" width="180" height="46" rx="9"></rect>
+            <text class="ad-t" x="1124" y="150">Tableros y alarmas</text>
+            <text class="ad-sub" x="1124" y="165">por perfil de usuario</text>
+            <rect class="ad-box b5" x="1110" y="187" width="180" height="46" rx="9"></rect>
+            <text class="ad-t" x="1124" y="208">Reportes automáticos</text>
+            <text class="ad-sub" x="1124" y="223">semanal · mensual</text>
+            <rect class="ad-box b5" x="1110" y="245" width="180" height="46" rx="9"></rect>
+            <text class="ad-t" x="1124" y="266">Prefacturas en PDF</text>
+            <text class="ad-sub" x="1124" y="281">una por local</text>
+            <rect class="ad-box b5" x="1110" y="303" width="180" height="46" rx="9"></rect>
+            <text class="ad-t" x="1124" y="324">API</text>
+            <text class="ad-sub" x="1124" y="339">hacia el ERP del cliente</text>
+
+            <line class="ad-link" x1="270" y1="67" x2="326" y2="140"></line>
+            <line class="ad-link" x1="270" y1="153" x2="326" y2="153"></line>
+            <line class="ad-link" x1="270" y1="239" x2="326" y2="166"></line>
+            <line class="ad-link" x1="270" y1="325" x2="326" y2="325"></line>
+
+            <line class="ad-link" x1="530" y1="153" x2="586" y2="225"></line>
+            <text class="ad-edge" x="558" y="160">MQTT</text>
+            <line class="ad-link" x1="530" y1="325" x2="586" y2="258"></line>
+            <text class="ad-edge" x="622" y="296">cada minuto</text>
+
+            <line class="ad-link" x1="790" y1="239" x2="846" y2="239"></line>
+            <text class="ad-edge" x="818" y="230">HTTPS</text>
+            <text class="ad-edge" x="818" y="256">buffer</text>
+
+            <line class="ad-link" x1="1050" y1="239" x2="1106" y2="152"></line>
+            <line class="ad-link" x1="1050" y1="239" x2="1106" y2="210"></line>
+            <line class="ad-link" x1="1050" y1="239" x2="1106" y2="268"></line>
+            <line class="ad-link" x1="1050" y1="239" x2="1106" y2="326"></line>
+
+            <polyline class="ad-ctrl" points="925,287 925,400 690,400 690,280"></polyline>
+            <text class="ad-edge" x="807" y="392">comandos de control · on/off</text>
+          </svg>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- SOLUTIONS -->
+  <hr class="rule">
+  <section class="sec" id="soluciones">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow" data-en="Solutions">Soluciones</p>
+        <h2 data-en="Six ways we put the same chain to work">Seis formas de poner la misma cadena a trabajar</h2>
+      </div>
+
+      <div class="sol-grid" data-reveal>
+        <div class="sol is-lead">
+          <span class="feat-n" aria-hidden="true">01</span>
+          <div class="sol-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-2-1.6-2 1.6-2-1.6-2 1.6-2-1.6L6 21V3z"/><path d="M9 8h6"/><path d="M9 12h6"/><path d="M9 16h3"/></svg></div>
+          <span class="k" data-en="Buildings">Edificios</span>
+          <h3 data-en="Submetering and billing">Submedición y facturación</h3>
+          <p data-en="Metering per unit, tariff applied automatically, common areas prorated and an invoice per tenant, every month, without manual readings.">Medición por local, tarifa aplicada automáticamente, áreas comunes prorrateadas y una factura por inquilino cada mes, sin lecturas manuales.</p>
+        </div>
+        <div class="sol is-lead">
+          <span class="feat-n" aria-hidden="true">02</span>
+          <div class="sol-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 17.5a8.5 8.5 0 1 1 17 0"/><path d="M12 17.5l4.6-5.2"/><circle cx="12" cy="17.5" r="1.1"/></svg></div>
+          <span class="k" data-en="Industry">Industria</span>
+          <h3 data-en="Energy management and SCADA">Gestión de energía y SCADA</h3>
+          <p data-en="The electrical room as a live single-line diagram, consumption broken down by transformer and feeder, solar generation kept apart from the grid, and alerts on power factor and abnormal usage before the bill arrives.">El cuarto eléctrico como unifilar en vivo, el consumo desglosado por transformador y alimentador, la generación solar separada de la red y alertas de factor de potencia y consumo anómalo antes de que llegue el recibo.</p>
+        </div>
+        <div class="sol">
+          <span class="feat-n" aria-hidden="true">03</span>
+          <div class="sol-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v17"/><path d="M14 9.5h4a1 1 0 0 1 1 1V21"/><path d="M8 7h3M8 11h3M8 15h3"/></svg></div>
+          <span class="k">BMS</span>
+          <h3 data-en="Building management">Gestión de edificios</h3>
+          <p data-en="Centralized control of HVAC, lighting and pumps, with scheduling, setpoints and automation rules. Comfort for the occupants and a lower bill for the administration.">Control centralizado de aire acondicionado, iluminación y bombas, con horarios, setpoints y reglas de automatización. Confort para el ocupante y menor gasto para la administración.</p>
+        </div>
+        <div class="sol">
+          <span class="feat-n" aria-hidden="true">04</span>
+          <div class="sol-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5v19"/><path d="M4 7l16 10"/><path d="M20 7L4 17"/><path d="M12 6.4L9.6 4M12 6.4l2.4-2.4M12 17.6l-2.4 2.4M12 17.6l2.4 2.4"/></svg></div>
+          <span class="k" data-en="Cold chain">Cadena de frío</span>
+          <h3 data-en="Cold room monitoring">Monitoreo de cuartos fríos</h3>
+          <p data-en="Temperature and door state on every chamber, with thresholds set per area and an alert the moment a door stays open or a compressor falls behind. Compliance reports included.">Temperatura y estado de puerta en cada cámara, con umbrales definidos por área y una alerta en el momento en que una puerta queda abierta o un compresor se queda atrás. Con reporte de cumplimiento.</p>
+        </div>
+        <div class="sol">
+          <span class="feat-n" aria-hidden="true">05</span>
+          <div class="sol-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12h2.8l2.2-6 3.2 12 2.8-9.5 1.9 3.5h6.1"/></svg></div>
+          <span class="k" data-en="Reliability">Confiabilidad</span>
+          <h3 data-en="Predictive maintenance">Mantenimiento predictivo</h3>
+          <p data-en="Vibration and temperature on critical motors, trended per axis to catch imbalance, misalignment and bearing wear while there is still time to schedule the stop.">Vibración y temperatura en motores críticos, con tendencia por eje para detectar desbalance, desalineación y desgaste de rodamientos mientras todavía hay tiempo de programar el paro.</p>
+        </div>
+        <div class="sol">
+          <span class="feat-n" aria-hidden="true">06</span>
+          <div class="sol-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.1"/><path d="M3 20.5a6 6 0 0 1 12 0"/><path d="M16.4 5.9a3.1 3.1 0 0 1 0 6.2"/><path d="M17 14.6a6 6 0 0 1 4 5.9"/></svg></div>
+          <span class="k" data-en="Traffic">Aforo</span>
+          <h3 data-en="People counting">Conteo de personas</h3>
+          <p data-en="Automatic footfall at entrances and zones, by hour and by day, to size staffing, compare locations and measure what a campaign actually brought through the door.">Aforo automático en entradas y zonas, por hora y por día, para dimensionar personal, comparar sucursales y medir qué tanta gente trajo realmente una campaña.</p>
+        </div>
+      </div>
+
+      <figure data-reveal class="shot shot-wide shot-mid">
+        <div class="shot-frame">
+          <img src="assets/plataforma/data-center.jpg" alt="Modelo 3D de un cuarto de telecomunicaciones con sus racks y los sensores en vivo: energía del rack encendida a 32.9 A, puerta abierta a 26.0 °C y ambiente con 686 ppm de CO₂, 25.7 °C y 26 % de humedad" loading="lazy" width="1213" height="825">
+        </div>
+        <figcaption data-en="A data center room in 3D, with live energy, door and environment sensors.">Un cuarto de data center en 3D, con los sensores de energía, puerta y ambiente en vivo.</figcaption>
+      </figure>
+
+      <figure data-reveal class="shot shot-wide shot-mid">
+        <div class="shot-frame">
+          <img src="assets/plataforma/temperatura-humedad.jpg" alt="Planta de alimentos en Lumen Cloud con la temperatura en vivo de cada área sobre el plano y una tabla de temperatura, humedad y batería por sensor" loading="lazy" width="1600" height="809">
+        </div>
+        <figcaption data-en="Live temperature and humidity per area, each with its own threshold.">Temperatura y humedad en vivo por área, cada una con su propio umbral.</figcaption>
+      </figure>
+
+      <div class="sensors">
+        <p class="eyebrow" data-en="Sensors we deploy">Sensórica que instalamos</p>
+        <div class="chips">
+          <span class="chip" data-en="Energy (kWh)">Energía (kWh)</span>
+          <span class="chip" data-en="Water">Agua</span>
+          <span class="chip" data-en="Gas">Gas</span>
+          <span class="chip" data-en="Temperature">Temperatura</span>
+          <span class="chip" data-en="Humidity">Humedad</span>
+          <span class="chip" data-en="Vibration">Vibración</span>
+          <span class="chip" data-en="Door">Puerta</span>
+          <span class="chip" data-en="Water leak">Fuga de agua</span>
+          <span class="chip" data-en="People">Personas</span>
+          <span class="chip" data-en="Thermostat">Termostato</span>
+          <span class="chip" data-en="Pressure">Presión</span>
+          <span class="chip" data-en="Level">Nivel</span>
+          <span class="chip" data-en="Soil moisture">Humedad de suelo</span>
+          <span class="chip" data-en="Weather">Clima</span>
+          <span class="chip" data-en="On/off control">Control on/off</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASES -->
+  <hr class="rule">
+  <section class="sec" id="casos">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow" data-en="In the field">En campo</p>
+        <h2 data-en="What we have already built">Lo que ya tenemos operando</h2>
+        <p class="lede" data-en="Real installations, described by sector. Client names stay with the client.">Instalaciones reales, descritas por sector. El nombre del cliente se queda con el cliente.</p>
+      </div>
+
+      <div class="cases" data-reveal>
+        <div class="case">
+          <span class="feat-n" aria-hidden="true">01</span>
+          <span class="s" data-en="Shopping plaza">Plaza comercial</span>
+          <p data-en="Submetering and billing per unit with the medium-voltage tariff schedule applied automatically, including the power factor measured at the utility's own metering point and its corresponding surcharge — so what the plaza charges its tenants and what the utility charges the plaza rest on the same arithmetic.">Submedición y facturación por local con el pliego tarifario de media tensión aplicado automáticamente, incluyendo el factor de potencia medido en el punto de la distribuidora y su recargo correspondiente — de modo que lo que la plaza le cobra a sus locales y lo que la distribuidora le cobra a la plaza descansan en la misma aritmética.</p>
+        </div>
+        <div class="case">
+          <span class="feat-n" aria-hidden="true">02</span>
+          <span class="s" data-en="Shopping center with solar">Centro comercial con solar</span>
+          <p data-en="A 20 kW photovoltaic array metered separately from grid consumption, so self-generated energy and purchased energy never get mixed up — neither in the reports nor in what each tenant ends up paying.">Un arreglo fotovoltaico de 20 kW medido aparte del consumo de red, para que la energía autogenerada y la comprada nunca se confundan — ni en los reportes ni en lo que termina pagando cada local.</p>
+        </div>
+        <div class="case">
+          <span class="feat-n" aria-hidden="true">03</span>
+          <span class="s" data-en="Office tower">Torre de oficinas</span>
+          <p data-en="Energy and water per unit, pushed by API into the administrator's ERP so the invoice is issued from their own accounting system instead of being retyped from a report.">Energía y agua por unidad, enviadas por API al ERP del administrador para que la factura se emita desde su propio sistema contable en vez de transcribirse a mano desde un reporte.</p>
+        </div>
+        <div class="case">
+          <span class="feat-n" aria-hidden="true">04</span>
+          <span class="s" data-en="Textile plant · solar">Planta textil · solar</span>
+          <p data-en="The electrical rooms as a live SCADA, energy per transformer and feeder, and the solar plant metered apart from the grid and the diesel generator. Every week a report goes out on its own, with a continuity check built in: if a meter leaves a gap, the report flags it before it reaches anyone's desk.">Los cuartos eléctricos como SCADA en vivo, la energía por transformador y alimentador, y la planta solar medida aparte de la red y del generador diésel. Cada semana sale solo un reporte con validación de continuidad: si un medidor deja un hueco, el reporte lo señala antes de llegar al escritorio de nadie.</p>
+        </div>
+        <div class="case">
+          <span class="feat-n" aria-hidden="true">05</span>
+          <span class="s" data-en="Agribusiness · cold chain">Agroindustria · cadena de frío</span>
+          <p data-en="Temperature monitored area by area, each with its own thresholds agreed with quality control, plus a weekly compliance report showing how long each area spent outside range.">Temperatura monitoreada área por área, cada una con sus propios umbrales acordados con control de calidad, más un reporte semanal de cumplimiento que muestra cuánto tiempo estuvo cada área fuera de rango.</p>
+        </div>
+        <div class="case">
+          <span class="feat-n" aria-hidden="true">06</span>
+          <span class="s" data-en="Manufacturing · critical motors">Manufactura · motores críticos</span>
+          <p data-en="Vibration and temperature on the motors the line cannot run without, trended per axis so imbalance and bearing wear show up as a curve weeks before they show up as a breakdown.">Vibración y temperatura en los motores sin los cuales la línea no corre, con tendencia por eje para que el desbalance y el desgaste de rodamiento aparezcan como una curva semanas antes de aparecer como una falla.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW WE WORK -->
+  <hr class="rule">
+  <section class="sec" id="nosotros">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow" data-en="How we work">Cómo trabajamos</p>
+        <h2 data-en="Personalized. Value driven. And we do the installing ourselves.">A la medida. Enfocado en el retorno. Y la instalación la hacemos nosotros.</h2>
+      </div>
+
+      <div class="how" data-reveal>
+        <div class="how-it">
+          <span class="feat-n" aria-hidden="true">01</span>
+          <span class="feat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.6" y="8.6" width="18.8" height="6.8" rx="1.6"/><path d="M7 8.6v3M11 8.6v4.4M15 8.6v3M19 8.6v4.4"/></svg></span>
+          <h3 data-en="We design on what is actually there">Diseñamos sobre lo que hay</h3>
+          <p data-en="We visit the site, open the switchboards, take stock of the loads and the space, and design the solution around what we find. We don't sell a closed package and then discover it doesn't fit.">Visitamos el sitio, abrimos los tableros, levantamos las cargas y el espacio disponible, y diseñamos la solución alrededor de lo que encontramos. No vendemos un paquete cerrado para después descubrir que no cabe.</p>
+        </div>
+        <div class="how-it">
+          <span class="feat-n" aria-hidden="true">02</span>
+          <span class="feat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.4 17.6 9 11.4l3.6 3.2 5.4-6.4"/><path d="M14.6 8.2h4.4v4.4"/></svg></span>
+          <h3 data-en="Every project justified with numbers">Cada proyecto justificado con números</h3>
+          <p data-en="Billing that was being lost, energy that stops being wasted, downtime that doesn't happen. If the return isn't there, we say so before anyone buys equipment.">Facturación que se estaba perdiendo, energía que se deja de desperdiciar, paros que no ocurren. Si el retorno no está, lo decimos antes de que alguien compre equipo.</p>
+        </div>
+        <div class="how-it">
+          <span class="feat-n" aria-hidden="true">03</span>
+          <span class="feat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.4"/><path d="M5.4 20.2a6.6 6.6 0 0 1 13.2 0"/></svg></span>
+          <h3 data-en="One party responsible, end to end">Un solo responsable, de punta a punta</h3>
+          <p data-en="Design, supply, installation in the panel, commissioning, the platform and ongoing support. When something stops reporting there is exactly one phone number to call.">Diseño, suministro, instalación en tablero, puesta en marcha, plataforma y soporte continuo. Cuando algo deja de reportar hay exactamente un número al cual llamar.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact sec" id="contacto">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow" data-en="Get in touch">Hablemos</p>
+        <h2 data-en="Tell us what you need to measure.">Cuéntanos qué necesitas medir.</h2>
+        <p class="lede" data-en="A plaza that wants to bill its tenants properly, a plant that doesn't know where its energy goes, a cold chain that can't afford a surprise. Write to us and we'll go see the site.">Una plaza que quiere facturarles bien a sus locales, una planta que no sabe a dónde se le va la energía, una cadena de frío que no se puede dar el lujo de una sorpresa. Escríbenos y vamos a ver el sitio.</p>
+      </div>
+
+      <div class="ch" data-reveal>
+        <a class="chan" href="mailto:info@lumenenergysolutions.com">
+          <span class="k" data-en="Email">Correo</span>
+          <span class="v">info@lumenenergysolutions.com</span>
+          <span class="d" data-en="We reply the same day.">Respondemos el mismo día.</span>
+        </a>
+        <div class="chan">
+          <span class="k">WhatsApp</span>
+          <span class="v pending" data-en="+504 — to confirm">+504 — por confirmar</span>
+          <span class="d" data-en="Fastest way to reach us.">La vía más rápida para encontrarnos.</span>
+        </div>
+        <a class="chan" href="https://www.linkedin.com/company/14500789/" target="_blank" rel="noopener">
+          <span class="k">LinkedIn</span>
+          <span class="v">Lumen Energy Solutions</span>
+          <span class="d" data-en="Projects and updates.">Proyectos y novedades.</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="ft">
+    <div class="wrap ft-in">
+      <div class="ft-brand">
+        <img src="assets/lumen-logo.png" alt="Lumen Energy Solutions">
+        <small data-en="Honduras · El Salvador · Guatemala">Honduras · El Salvador · Guatemala</small>
+      </div>
+      <a href="https://www.linkedin.com/company/14500789/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+(function(){
+  var root = document.documentElement;
+  var nodes = document.querySelectorAll('[data-en]');
+  var btn = document.getElementById('lang-toggle');
+  var lang = 'es';
+
+  Array.prototype.forEach.call(nodes, function(el){
+    el.setAttribute('data-es', el.textContent);
+  });
+
+  function apply(next){
+    lang = next;
+    var attr = next === 'en' ? 'data-en' : 'data-es';
+    Array.prototype.forEach.call(nodes, function(el){
+      el.textContent = el.getAttribute(attr);
+    });
+    root.lang = next;
+    btn.textContent = next === 'en' ? 'ES' : 'EN';
+    btn.setAttribute('aria-label', next === 'en' ? 'Cambiar a español' : 'Switch to English');
+    try { localStorage.setItem('lumen-lang', next); } catch(e){}
+    reset();
+  }
+
+  btn.addEventListener('click', function(){ apply(lang === 'en' ? 'es' : 'en'); });
+
+  try {
+    var saved = localStorage.getItem('lumen-lang');
+    if (saved === 'en') apply('en'); else root.lang = 'es';
+  } catch(e){ root.lang = 'es'; }
+
+  /* ---- pentagon readout ---- */
+  var penta = document.querySelector('.penta');
+  var roN = document.getElementById('ro-n');
+  var roL = document.getElementById('ro-l');
+  var items = document.querySelectorAll('.chain-item');
+  var grid = document.querySelector('.chain-grid');
+
+  function reset(){
+    if (!penta) return;
+    penta.removeAttribute('data-active');
+    roN.textContent = '5';
+    roL.textContent = roL.getAttribute(lang === 'en' ? 'data-en' : 'data-es');
+  }
+
+  function activate(i){
+    var item = document.querySelector('.chain-item[data-i="' + i + '"]');
+    if (!item) return;
+    penta.setAttribute('data-active', i);
+    roN.textContent = '0' + i;
+    roL.textContent = item.querySelector('.chain-name').textContent;
+  }
+
+  Array.prototype.forEach.call(items, function(item){
+    var i = item.getAttribute('data-i');
+    item.addEventListener('mouseenter', function(){ activate(i); });
+    item.addEventListener('focus', function(){ activate(i); });
+  });
+
+  Array.prototype.forEach.call(penta.querySelectorAll('.badges > g'), function(g){
+    var i = g.getAttribute('data-side');
+    g.style.cursor = 'default';
+    g.addEventListener('mouseenter', function(){ activate(i); });
+  });
+
+  if (grid) grid.addEventListener('mouseleave', reset);
+
+  /* ---- reveal on scroll ----
+     Classes are added from here, never in the markup, so a page without JS — or
+     with motion turned down — shows everything straight away. Items in a group
+     come in one after another, and a group re-arms once it leaves the viewport
+     so the entrance plays again every time you scroll back to it. */
+  var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!calm && 'IntersectionObserver' in window) {
+    var groups = [];
+
+    function arm(g){                       // back to hidden, ready to play again
+      g.items.forEach(function(el){
+        el.classList.remove('reveal-on');
+        el.classList.add('reveal');
+      });
+    }
+    function play(g){
+      g.items.forEach(function(el){
+        if (!el.classList.contains('reveal')) return;   // already showing
+        el.classList.add('reveal-on');
+        var done = function(){                          // drop the classes so the
+          el.classList.remove('reveal', 'reveal-on');   // hover transitions stay crisp
+        };
+        el.addEventListener('animationend', done, { once: true });
+      });
+    }
+    function makeGroup(root, items, step){
+      items = items.filter(function(el){ return el.nodeType === 1; });
+      if (!items.length) return;
+      items.forEach(function(el, i){ el.style.setProperty('--d', (i * step) + 'ms'); });
+      var g = { root: root, items: items };
+      root.__revealGroup = g;
+      // hide it now only if it starts out below the fold — no flash on load
+      if (root.getBoundingClientRect().top >= window.innerHeight * 0.9) arm(g);
+      groups.push(g);
+    }
+
+    Array.prototype.forEach.call(document.querySelectorAll('.sec-head'), function(h){
+      makeGroup(h, Array.prototype.slice.call(h.children), 150);
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-reveal]'), function(el){
+      var kids = Array.prototype.slice.call(el.children);
+      makeGroup(el, kids.length > 1 ? kids : [el], 150);
+    });
+
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        var g = e.target.__revealGroup;
+        if (!g) return;
+        if (e.isIntersecting) play(g); else arm(g);
+      });
+    }, { rootMargin: '0px 0px -10% 0px' });
+
+    groups.forEach(function(g){ io.observe(g.root); });
+  }
+})();
+</script>
+
+
+</body></html>
