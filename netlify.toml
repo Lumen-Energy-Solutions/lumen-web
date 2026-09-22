@@ -1,0 +1,10 @@
+# Sitio estatico: no hay build, se publica la raiz del repo tal cual.
+[build]
+  publish = "."
+  command = ""
+
+# Las imagenes y el logo no cambian de nombre, se pueden cachear fuerte.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
