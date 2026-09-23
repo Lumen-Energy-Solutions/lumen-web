@@ -1024,7 +1024,7 @@ p{margin:0}
             <div class="chain-body">
               <div class="chain-top">
                 <span class="chain-i">04</span>
-                <span class="chain-name">Lumen Cloud</span>
+                <span class="chain-name">Lumen Cloud / On-premise</span>
               </div>
               <p data-en="Our platform. An asset hierarchy that mirrors the real building — site, floor, unit, circuit — dashboards per user profile, and alarms with thresholds and context. Each client sees only their own operation. It can also be installed on-premise, on the client's own servers, when the data must not leave the plant.">Nuestra plataforma. Una jerarquía de activos que refleja el edificio real — sitio, piso, local, circuito —, tableros por perfil de usuario y alarmas con umbral y contexto. Cada cliente ve únicamente su operación. También se instala on-premise, en los servidores del cliente, cuando los datos no deben salir de la planta.</p>
               <div class="tags"><span class="tag" data-en="dashboards">tableros</span><span class="tag" data-en="alarms">alarmas</span><span class="tag">API</span><span class="tag">multi-tenant</span></div>
@@ -1047,11 +1047,11 @@ p{margin:0}
 
       <figure data-reveal class="arch">
         <div class="arch-scroll">
-          <svg viewBox="0 0 1310 425" role="img" aria-label="Arquitectura de una instalación Lumen: el medidor ultrasónico de agua, el medidor de energía de riel DIN y los sensores de temperatura y vibración llegan por LoRaWAN a un gateway propio; los medidores que ya estaban instalados se leen por Modbus RTU o TCP sobre la red del edificio; ambos caminos entran a un equipo edge en sitio que normaliza, valida y almacena; el edge envía a Lumen Cloud por HTTPS con buffer si se cae el enlace; y Lumen Cloud produce tableros, reportes automáticos, prefacturas en PDF y una API hacia el ERP del cliente, además de devolver comandos de control al edge.">
+          <svg viewBox="0 0 1310 425" role="img" aria-label="Arquitectura de una instalación Lumen: el medidor ultrasónico de agua, el medidor de energía de riel DIN y los sensores de temperatura y vibración llegan por LoRaWAN a un gateway propio; los medidores que ya estaban instalados se leen por Modbus RTU o TCP sobre la red del edificio; ambos caminos entran a un equipo edge en sitio que normaliza, valida y almacena; el edge envía a Lumen Cloud o a un servidor on-premise del cliente por HTTPS con buffer si se cae el enlace; y la plataforma produce tableros, reportes automáticos, prefacturas en PDF y una API hacia el ERP del cliente, además de devolver comandos de control al edge.">
             <text class="ad-stage s1" x="145" y="20">01 · EN CAMPO</text>
             <text class="ad-stage s2" x="430" y="20">02 · CONECTIVIDAD</text>
             <text class="ad-stage s3" x="690" y="20">03 · EDGE EN SITIO</text>
-            <text class="ad-stage s4" x="950" y="20">04 · LUMEN CLOUD</text>
+            <text class="ad-stage s4" x="950" y="20">04 · LUMEN CLOUD / ON-PREMISE</text>
             <text class="ad-stage s5" x="1200" y="20">05 · SALIDAS</text>
 
             <rect class="ad-box b1" x="20" y="30" width="250" height="74" rx="11"></rect>
@@ -1114,9 +1114,10 @@ p{margin:0}
               <rect class="lcb" x="18.4" y="17.5" width="3.4" height="10.5" rx="1"></rect>
               <rect class="lcb" x="23.4" y="13" width="3.4" height="15" rx="1"></rect>
             </g>
-            <text class="ad-ct2" x="916" y="232">Lumen Cloud</text>
-            <text class="ad-cs2" x="916" y="250">jerarquía de activos</text>
-            <text class="ad-cs2" x="916" y="265">alarmas · tarifas</text>
+            <text class="ad-ct2" x="916" y="225">Lumen Cloud</text>
+            <text class="ad-ct2" x="916" y="242">/ On-premise</text>
+            <text class="ad-cs2" x="916" y="259">jerarquía de activos</text>
+            <text class="ad-cs2" x="916" y="273">alarmas · tarifas</text>
 
             <rect class="ad-box b5" x="1110" y="129" width="180" height="46" rx="9"></rect>
             <text class="ad-t" x="1124" y="150">Tableros y alarmas</text>
